@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2024/12/16 18:22:42 by ozamora-         ###   ########.fr        #
+#    Updated: 2024/12/17 18:52:47 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_DIR			:= src/
 INC_DIR			:= inc/
 OBJ_DIR			:= obj/
 LIB_DIR			:= lib/
-LIBFT_DIR		:= libft/
+LIBFT_DIR		:= $(LIB_DIR)libft/
 LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
 # **************************************************************************** #
@@ -54,6 +54,7 @@ LDFLAGS	:= -L$(LIBFT_DIR) -lft
 # PROJECT
 NAME  := so_long
 LIBFT := $(LIBFT_DIR)libft.a
+MLX42 := 
 
 # **************************************************************************** #
 # COLOURS
