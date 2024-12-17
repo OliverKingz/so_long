@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2024/12/17 18:52:47 by ozamora-         ###   ########.fr        #
+#    Updated: 2024/12/17 21:38:39 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRC_DIR			:= src/
 INC_DIR			:= inc/
 OBJ_DIR			:= obj/
 LIB_DIR			:= lib/
+LIBMLX_DIR		:= $(LIB_DIR)MLX42/
+LIBMLX_INC_DIR	:= $(LIBMLX_DIR)include/
 LIBFT_DIR		:= $(LIB_DIR)libft/
 LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
@@ -32,7 +34,7 @@ LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 SRC_FILES := $(wildcard $(SRC_DIR)*.c)
 
 # INCLUDE FILES
-INC_FILES := push_swap
+INC_FILES := so_long
 
 # GENERAL FILES
 SRCS    := $(SRC_FILES)
@@ -40,21 +42,24 @@ OBJS    := $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
 DEPS    := $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.d)))
 INCS    := $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 INCS	+= $(LIBFT_INC_DIR)libft.h
-
-# **************************************************************************** #
-# COMPILER
-CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror
-CFLAGS	+= -g3 -fsanitize=address
-CFLAGS	+= -MMD -MP
-IFLAGS	:= -I$(INC_DIR) -I$(LIBFT_INC_DIR)
-LDFLAGS	:= -L$(LIBFT_DIR) -lft
+INCS	+= $(LIBMLX_INC_DIR)
 
 # **************************************************************************** #
 # PROJECT
 NAME  := so_long
 LIBFT := $(LIBFT_DIR)libft.a
-MLX42 := 
+LIBMLX := $(LIBMLX_DIR)build/libmlx42.a
+
+# **************************************************************************** #
+# COMPILER
+CC		:= cc
+CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	+= -Wunreachable-code -Ofast
+# CFLAGS	+= -g3 -fsanitize=address
+# CFLAGS	+= -MMD -MP
+IFLAGS	:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
+LDFLAGS	:= $(LIBFT)
+LDFLAGS	+= $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # **************************************************************************** #
 # COLOURS
@@ -71,7 +76,7 @@ CLEAR_LINE = \033[2K
 -include $(DEPS)
 
 # Default rule to create the program
-all: $(NAME)
+all: $(LIBFT) $(LIBMLX) $(NAME)
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -79,28 +84,36 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 # Rule to create the program
-$(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s push_swap]:\t" \
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(IFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) 
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
 
-# Rule to make the library
+# Rule to make the library Libft
+libft: $(LIBFT)
 $(LIBFT):
 	@$(MAKE_LIB) $(LIBFT_DIR)
+
+# Rule to make the library Libmlx
+libmlx: $(LIBMLX)
+$(LIBMLX):
+	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[Codam's LibMLX]:\t" \
+		"$(DEF_COLOR)$(BOLD_GREEN)CREATED$(DEF_COLOR)\n"
 
 # Rule to clean generated files
 clean:
 	@$(RM) $(OBJ_DIR)
 	@make clean -sC $(LIBFT_DIR)
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s push_swap]:\t" \
+	@$(RM) $(LIBMLX_DIR)/build
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)OBJECTS CLEANED$(DEF_COLOR)\n"
 
 # Rule to clean generated files and the executablle
 fclean: 
 	@make clean > /dev/null
-	@$(RM) $(NAME) $(LIB_DIR)
 	@make fclean -sC $(LIBFT_DIR)
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s push_swap]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)FULLY CLEANED$(DEF_COLOR)\n"
 
 # Rule to recompile from zero. 
@@ -108,18 +121,19 @@ re: fclean all
 
 # Rule to check if the files pass norminette
 norm:
-	@norminette $(SRCS) $(INCS)
+	@norminette $(SRCS) $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h
 
 show:
 	@echo "Compilation command:\t"\
-		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)push_swap.c -o $(OBJ_DIR)push_swap.o"
+		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)so_long.c -o $(OBJ_DIR)so_long.o"
 	@echo "Linking command:\t"\
 		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
-	@echo "Cleaning command:\t $(RM) $(OBJ_DIR) $(LIB_DIR)" $(NAME)
+	@echo "Cleaning command:\t $(RM) $(OBJ_DIR)" $(NAME)
 
 info:
 	@echo "NAME: $(NAME)"
 	@echo "LIBFT: $(LIBFT)"
+	@echo "LIBMLX: $(LIBMLX)"
 	@echo "CC: $(CC)"
 	@echo "CFLAGS: $(CFLAGS)"
 	@echo "IFLAGS: $(IFLAGS)"
@@ -135,6 +149,8 @@ info:
 	@echo "LIB_DIR: $(LIB_DIR)"
 	@echo "LIBFT_DIR: $(LIBFT_DIR)"
 	@echo "LIBFT_INC_DIR: $(LIBFT_INC_DIR)"
+	@echo "LIBMLX_DIR: $(LIBMLX_DIR)"
+	@echo "LIBMLX_INC_DIR: $(LIBMLX_INC_DIR)"
 	@echo "SRC_FILES: $(SRC_FILES)"
 	@echo "INC_FILES: $(INC_FILES)"
 	@echo "SRCS: $(SRCS)"
@@ -142,10 +158,10 @@ info:
 	@echo "DEPS: $(DEPS)"
 	@echo "INCS: $(INCS)"
 
-valgrind: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+# valgrind: $(NAME)
+# 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 
 # Phony targets
-.PHONY: all clean fclean re norm show info
+.PHONY: all clean fclean re libmlx libft norm show info
 
 # **************************************************************************** #
