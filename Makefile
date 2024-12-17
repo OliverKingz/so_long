@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2024/12/17 21:38:39 by ozamora-         ###   ########.fr        #
+#    Updated: 2024/12/17 22:09:18 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ CLEAR_LINE = \033[2K
 -include $(DEPS)
 
 # Default rule to create the program
-all: $(LIBFT) $(LIBMLX) $(NAME)
+all: $(LIBMLX) $(LIBFT) $(NAME)
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -85,7 +85,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 # Rule to create the program
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) 
+	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
 	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
 

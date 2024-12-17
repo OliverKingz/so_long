@@ -7,10 +7,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "MLX42/MLX42.h"
-#include "MLX42/MLX42_Int.h"
-#include "glad/glad.h"
-#include "KHR/khrplatform.h"
-#include "lodepng/lodepng.h"
+// #include "MLX42/MLX42_Int.h"
+// #include "glad/glad.h"
+// #include "KHR/khrplatform.h"
+// #include "lodepng/lodepng.h"
 
 #define WIDTH 512
 #define HEIGHT 512
@@ -48,13 +48,13 @@ void ft_hook(void* param)
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(mlx, MLX_KEY_UP) || mlx_is_key_down(mlx, MLX_KEY_W))
 		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN) || mlx_is_key_down(mlx, MLX_KEY_S))
 		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_A))
 		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_D))
 		image->instances[0].x += 5;
 }
 
