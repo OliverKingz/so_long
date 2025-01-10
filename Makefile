@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2024/12/17 22:09:18 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/10 19:05:43 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # Rule to create the program
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
 
 # Rule to make the library Libft
@@ -98,7 +98,7 @@ $(LIBFT):
 libmlx: $(LIBMLX)
 $(LIBMLX):
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[Codam's LibMLX]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[Codam's LibMLX]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)CREATED$(DEF_COLOR)\n"
 
 # Rule to clean generated files
@@ -106,14 +106,14 @@ clean:
 	@$(RM) $(OBJ_DIR)
 	@make clean -sC $(LIBFT_DIR)
 	@$(RM) $(LIBMLX_DIR)/build
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)OBJECTS CLEANED$(DEF_COLOR)\n"
 
 # Rule to clean generated files and the executablle
 fclean: 
 	@make clean > /dev/null
 	@make fclean -sC $(LIBFT_DIR)
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)\t[ozamora-'s so_long]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)FULLY CLEANED$(DEF_COLOR)\n"
 
 # Rule to recompile from zero. 
