@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/10 20:12:11 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:04:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 // 		image->instances[0].x += 5;
 // }
 
-static void	ft_error(void)
+void	ft_error(void)
 {
 	perror(mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -40,10 +40,13 @@ static void	ft_error(void)
 
 // -----------------------------------------------------------------------------
 
-int32_t	main(void)
+int32_t	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 2)
+		ft_error();
+	game = init_game(&game, argv[1]);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "ozamora-'s so_long", true);
 	if (!game.mlx)
 		ft_error();

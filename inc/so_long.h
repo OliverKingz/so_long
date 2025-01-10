@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/10 20:00:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:09:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ typedef struct s_graph
 
 typedef struct s_game
 {
-	mlx_t		*mlx;
-	t_entity	player;
 	t_map		map;
 	t_graph		graphs;
+	t_entity	player;
+	mlx_t		*mlx;
 	int			moves;
 	bool		is_running;
 }	t_game;
+
+void	ft_error(void);
+t_game	init_game(t_game *game, char *map_dir);
+void	init_map(t_game *game, char *map_dir);
 
 #endif
