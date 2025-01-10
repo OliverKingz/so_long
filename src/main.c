@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/10 20:01:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:02:11 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int32_t	main(void)
 {
 	t_game	game;
 
-	game.map.grid = ;
 	game.mlx = mlx_init(WIDTH, HEIGHT, "ozamora-'s so_long", true);
 	if (!game.mlx)
 		ft_error();
