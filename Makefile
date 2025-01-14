@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/10 19:05:43 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/14 14:53:15 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,7 @@ $(LIBFT):
 libmlx: $(LIBMLX)
 $(LIBMLX):
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[Codam's LibMLX]:\t" \
+	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[42-codam's LibMLX]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)CREATED$(DEF_COLOR)\n"
 
 # Rule to clean generated files

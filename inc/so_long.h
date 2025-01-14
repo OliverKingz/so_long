@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/10 21:09:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:01:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 # include "MLX42/MLX42.h"
 # include "libft.h"
-# include <stdbool.h>
 
 /* Explicitly allowed functions for so_long, already included at the libraries
-# include <unistd.h> // To use system calls like write, open, read, close.
-# include <stdlib.h> // To use memory allocation (malloc, free), exit and size_t
-# include <stdio.h>  // To use perror
-# include <string.h> // To use strerror
+# include <unistd.h>  // To use system calls like write, open, read, close.
+# include <stdlib.h>  // To use memory allocation (malloc, free), exit and size_t
+# include <stdio.h>   // To use perror
+# include <string.h>  // To use strerror
+# include <stdbool.h> // Included in MLX42
+# include <stddef.h>  // Already included in MLX42
+# include <stdint.h>  // Already included in MLX42
  */
 
 typedef struct s_entity
@@ -33,12 +35,12 @@ typedef struct s_entity
 
 typedef struct s_map
 {
-	char	**grid;
-	int		width;
-	int		height;
-	int		tile_size;
-	int		collect;
-	bool	is_valid;
+	char		**grid;
+	int			width;
+	int			height;
+	int			tile_size;
+	int			collect;
+	bool		is_valid;
 	t_entity	exit;
 }	t_map;
 
@@ -66,8 +68,16 @@ typedef struct s_game
 	bool		is_running;
 }	t_game;
 
+#define TILE_SIZE 36
+
 void	ft_error(void);
 t_game	init_game(t_game *game, char *map_dir);
 void	init_map(t_game *game, char *map_dir);
+void	init_graph(t_game *game);
+void	init_display(t_game *game);
+
+void	read_map(t_game *game, char *map_dir);
+void	make_map_grid(t_game *game, char *map_dir);
+void	print_map_grid(t_game *game, char *map_dir);
 
 #endif

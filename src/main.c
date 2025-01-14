@@ -6,15 +6,11 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/10 21:04:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:35:03 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-#define TILE_SIZE 36
-#define WIDTH TILE_SIZE*10
-#define HEIGHT TILE_SIZE*5
 
 // void ft_hook(void* param)
 // {
@@ -46,11 +42,9 @@ int32_t	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error();
+	print_map_grid(&game, argv[1]);
 	game = init_game(&game, argv[1]);
-	game.mlx = mlx_init(WIDTH, HEIGHT, "ozamora-'s so_long", true);
-	if (!game.mlx)
-		ft_error();
-	mlx_loop(game.mlx);
+	//mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
