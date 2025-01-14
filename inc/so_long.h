@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/14 16:01:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:32:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ typedef struct s_game
 	bool		is_running;
 }	t_game;
 
-#define TILE_SIZE 36
+#define TILE 36
 
 void	ft_error(void);
 t_game	init_game(t_game *game, char *map_dir);
 void	init_map(t_game *game, char *map_dir);
 void	init_graph(t_game *game);
 void	init_display(t_game *game);
+bool	display(t_game *game, int i, int j);
 
 void	read_map(t_game *game, char *map_dir);
 void	make_map_grid(t_game *game, char *map_dir);
-void	print_map_grid(t_game *game, char *map_dir);
+void	print_map(t_game *game, char *map_dir);
+void	print_map_grid(t_game *game);
 
 #endif

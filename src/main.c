@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/14 18:35:03 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:35:02 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ int32_t	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error();
-	print_map_grid(&game, argv[1]);
 	game = init_game(&game, argv[1]);
-	//mlx_loop(game.mlx);
+	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

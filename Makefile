@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/14 14:53:15 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/14 20:32:12 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,8 @@ LIBMLX := $(LIBMLX_DIR)build/libmlx42.a
 CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror
 CFLAGS	+= -Wunreachable-code -Ofast
+CFLAGS	+= -MMD -MP
 # CFLAGS	+= -g3 -fsanitize=address
-# CFLAGS	+= -MMD -MP
 IFLAGS	:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
 LDFLAGS	:= $(LIBFT)
 LDFLAGS	+= $(LIBMLX) -ldl -lglfw -pthread -lm
@@ -158,10 +158,14 @@ info:
 	@echo "DEPS: $(DEPS)"
 	@echo "INCS: $(INCS)"
 
+debug: CFLAGS += -g3 -fsanitize=address
+debug: re
+	@echo "\t\t\t$(BOLD_BLUE)Debug build complete $(DEF_COLOR)"
+
 # valgrind: $(NAME)
 # 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 
 # Phony targets
-.PHONY: all clean fclean re libmlx libft norm show info
+.PHONY: all clean fclean re libmlx libft norm show info debug
 
 # **************************************************************************** #
