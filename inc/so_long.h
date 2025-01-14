@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/14 21:32:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:59:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_game
 
 #define TILE 36
 
+void	ft_hook(void* param);
 void	ft_error(void);
 t_game	init_game(t_game *game, char *map_dir);
 void	init_map(t_game *game, char *map_dir);
