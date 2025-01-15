@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:36:10 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:43:40 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_game	init_game(t_game *game, char *map_dir)
 {
 	init_texture(game);
 	init_map(game, map_dir);
-	init_game_data(game);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	game->mlx = mlx_init((game->map.width - 1) * game->map.tile_size,
 			game->map.height * game->map.tile_size, "so_long", true);
@@ -32,6 +31,8 @@ t_game	init_game(t_game *game, char *map_dir)
 		ft_mlx_err("Failed init MLX42");
 	init_images(game);
 	init_display(game);
+	game->player.img = game->graphs.player;
+	game->moves = 0;
 	return (*game);
 }
 
@@ -74,12 +75,6 @@ void	init_images(t_game *game)
 	game->graphs.collect = mlx_texture_to_image(game->mlx,
 			game->graphs.collect_t);
 	game->graphs.exit = mlx_texture_to_image(game->mlx, game->graphs.exit_t);
-}
-
-void	init_game_data(t_game *game)
-{
-	game->player.img = game->graphs.player;
-	game->moves = 0;
 }
 
 void	init_display(t_game *game)

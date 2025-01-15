@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:34:37 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:50:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ void	free_game(t_game *game)
 		free(game->map.grid[i]);
 		i++;
 	}
+	free(game->map.grid);
+	mlx_delete_image(game->mlx, game->graphs.player);
+	mlx_delete_image(game->mlx, game->graphs.floor);
+	mlx_delete_image(game->mlx, game->graphs.wall);
+	mlx_delete_image(game->mlx, game->graphs.collect);
+	mlx_delete_image(game->mlx, game->graphs.exit);
+	mlx_delete_texture(game->graphs.player_t);
+	mlx_delete_texture(game->graphs.floor_t);
+	mlx_delete_texture(game->graphs.wall_t);
+	mlx_delete_texture(game->graphs.collect_t);
+	mlx_delete_texture(game->graphs.exit_t);
 }
 
 int32_t	main(int argc, char **argv)
@@ -72,7 +83,7 @@ int32_t	main(int argc, char **argv)
 	ft_putstr("\n\n");
 	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
 	free_game(&game);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

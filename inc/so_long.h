@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:32:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:41:26 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void				init_map(t_game *game, char *map_dir);
 void				init_texture(t_game *game);
 void				init_images(t_game *game);
 void				init_display(t_game *game);
-void				init_game_data(t_game *game);
 bool				display(t_game *game, mlx_image_t *tile, int x, int y);
 
 void				read_map(t_game *game, char *map_dir);
