@@ -6,13 +6,13 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 22:11:10 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:36:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_hook(void *param)
+void	ft_key_hook(void *param)
 {
 	t_game	*game;
 
@@ -32,6 +32,27 @@ void	ft_hook(void *param)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move(game, 1, 0);
 }
+
+// mlx_keyfunc	ft_key_hook(void *param)
+// {
+// 	t_game	*game;
+
+// 	game = param;
+// 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+// 		mlx_close_window(game->mlx);
+// 	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
+// 		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
+// 		move(game, 0, -1);
+// 	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)
+// 		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
+// 		move(game, 0, 1);
+// 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)
+// 		|| mlx_is_key_down(game->mlx, MLX_KEY_A))
+// 		move(game, -1, 0);
+// 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)
+// 		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
+// 		move(game, 1, 0);
+// }
 
 void	ft_mlx_err(const char *msg)
 {
@@ -63,6 +84,7 @@ void	free_game(t_game *game)
 	mlx_delete_image(game->mlx, game->graphs.wall);
 	mlx_delete_image(game->mlx, game->graphs.collect);
 	mlx_delete_image(game->mlx, game->graphs.exit);
+	mlx_delete_image(game->mlx, game->graphs.text);
 	mlx_delete_texture(game->graphs.player_t);
 	mlx_delete_texture(game->graphs.floor_t);
 	mlx_delete_texture(game->graphs.wall_t);
@@ -76,19 +98,15 @@ int32_t	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_mlx_err("Usage: ./so_long \"assets/maps/example.ber\"");
-	print_map(argv[1]);
-	ft_putstr("\n\n");
 	game = init_game(&game, argv[1]);
 	print_map_grid(&game);
-	ft_putstr("\n\n");
-	ft_printf("Moves: %d\n", game.moves);
-	mlx_put_string(game.mlx, "Moves: ", 5, 5);
-	mlx_loop_hook(game.mlx, ft_hook, &game);
-	mlx_loop(game.mlx);
-	if (game.is_running == false)
+	if (game.is_running == true)
 	{
-		free_game(&game);
-		mlx_terminate(game.mlx);
+		mlx_loop_hook(game.mlx, ft_key_hook, &game);
+		//mlx_key_hook(game.mlx, ft_key_hook, &game);
+		mlx_loop(game.mlx);
 	}
+	free_game(&game);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 22:17:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:26:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ bool	display(t_game *game, mlx_image_t *tile, int x, int y)
 	return (true);
 }
 
+void	display_text(t_game *game)
+{
+	char	*moves;
+
+	moves = ft_itoa(game->moves);
+	ft_printf("Moves: %d\n", game->moves);
+	mlx_delete_image(game->mlx, game->graphs.text);
+	game->graphs.text = mlx_put_string(game->mlx, moves, 6, 4);
+	free(moves);
+}
+
 void	move(t_game *game, int dx, int dy)
 {
 	int		new_x;
@@ -31,8 +42,8 @@ void	move(t_game *game, int dx, int dy)
 
 	new_x = game->player.x + dx;
 	new_y = game->player.y + dy;
-	if (new_x < 0 || new_x >= (game->map.width - 1)
-		|| new_y < 0 || new_y >= game->map.height)
+	if (new_x < 1 || new_x >= game->map.width - 1
+		|| new_y < 1 || new_y >= game->map.height - 1)
 		return ;
 	next_tile = game->map.grid[new_y][new_x];
 	if (next_tile == 1)
@@ -57,5 +68,5 @@ void	move(t_game *game, int dx, int dy)
 	game->player.img->instances[0].x += (dx * game->map.t_size);
 	game->player.img->instances[0].y += (dy * game->map.t_size);
 	game->moves++;
-	ft_printf("Moves: %d\n", game->moves);
+	display_text(game);
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 22:08:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:36:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_graph
 	mlx_image_t		*wall;
 	mlx_image_t		*collect;
 	mlx_image_t		*exit;
+	mlx_image_t		*text;
 }					t_graph;
 
 typedef struct s_game
@@ -67,20 +68,22 @@ typedef struct s_game
 	bool			is_running;
 }					t_game;
 
-void				ft_hook(void *param);
+void				ft_key_hook(void *param);
+//mlx_keyfunc			ft_key_hook(void *param)
 void				ft_mlx_err(const char *msg);
 void				free_game(t_game *game);
 
 t_game				init_game(t_game *game, char *map_dir);
-void				init_map(t_game *game, char *map_dir);
 void				init_texture(t_game *game);
 void				init_images(t_game *game);
 void				init_display(t_game *game);
+void				init_display_player(t_game *game);
 
 bool				display(t_game *game, mlx_image_t *tile, int x, int y);
+void				display_text(t_game *game);
 void				move(t_game *game, int dx, int dy);
-// bool	display_text(t_game *game, mlx_image_t *text_img, int x, int y):
 
+void				init_map(t_game *game, char *map_dir);
 void				read_map(t_game *game, char *map_dir);
 void				make_map_grid(t_game *game, char *map_dir);
 void				print_map(char *map_dir);
