@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 16:38:05 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:32:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_map
 	int				tile_size;
 	int				collect;
 	bool			is_valid;
-	t_entity		exit;
 }					t_map;
 
 typedef struct s_graph
@@ -65,18 +64,19 @@ typedef struct s_game
 	t_entity		player;
 	mlx_t			*mlx;
 	int				moves;
-	bool			is_running;
 }					t_game;
 
-# define TILE 36
+void				ft_hook(void *param);
+void				ft_mlx_err(const char *msg);
+void				free_game(t_game *game);
 
-void				ft_hook(t_game *game);
-void				ft_error(const char *msg);
 t_game				init_game(t_game *game, char *map_dir);
 void				init_map(t_game *game, char *map_dir);
-void				init_graph(t_game *game);
+void				init_texture(t_game *game);
+void				init_images(t_game *game);
 void				init_display(t_game *game);
-bool				display(mlx_t *mlx, mlx_image_t *tile, int x, int y);
+void				init_game_data(t_game *game);
+bool				display(t_game *game, mlx_image_t *tile, int x, int y);
 
 void				read_map(t_game *game, char *map_dir);
 void				make_map_grid(t_game *game, char *map_dir);
