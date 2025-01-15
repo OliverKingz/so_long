@@ -6,16 +6,14 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/14 21:59:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:38:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void ft_hook(void* param)
+void ft_hook(t_game* game)
 {
-	t_game*	game = param;
-
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
@@ -32,9 +30,16 @@ void ft_hook(void* param)
 		game->player.img->instances[0].x += TILE;
 }
 
-void	ft_error(void)
+void	ft_error(const char *msg)
 {
-	perror(mlx_strerror(mlx_errno));
+	if (msg)
+		perror(msg);
+	if (mlx_errno != 0)
+	{
+		write(2, "MLX42 Error: ", 13);
+		write(2, mlx_strerror(mlx_errno), ft_strlen(mlx_strerror(mlx_errno)));
+		write(2, "\n", 1);
+	}
 	exit(EXIT_FAILURE);
 }
 
@@ -45,7 +50,7 @@ int32_t	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		ft_error();
+		ft_error("Usage: ./so_long \"assets/maps/example.ber\"");
 	game = init_game(&game, argv[1]);
 	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);

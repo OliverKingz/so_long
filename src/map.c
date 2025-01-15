@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/14 21:13:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:23:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	read_map(t_game *game, char *map_dir);
 void	make_map_grid(t_game *game, char *map_dir);
-void	print_map(t_game *game, char *map_dir);
+void	print_map(char *map_dir);
 void	print_map_grid(t_game *game);
 
 void	read_map(t_game *game, char *map_dir)
@@ -26,7 +26,7 @@ void	read_map(t_game *game, char *map_dir)
 	game->map.is_valid = true;
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		ft_error();
+		ft_error("Invalid map direction");
 	row = 0;
 	line = get_next_line(fd);
 	if (line != NULL)
@@ -59,35 +59,34 @@ void	make_map_grid(t_game *game, char *map_dir)
 
 	grid = malloc(game->map.height * sizeof(char *));
 	if (!grid)
-		ft_error();
+		ft_error("Failed malloc");
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		(free(grid), ft_error());
-	i = 0;
-	while (i < game->map.height)
+		(free(grid), ft_error("Invalid map dir"));
+	i = -1;
+	while (++i < game->map.height)
 	{
 		grid[i] = get_next_line(fd);
 		if (grid[i] == NULL)
-		{	j = -1;
+		{
+			j = -1;
 			while (++j < i)
 				free(grid[j]);
-			(free(grid), close(fd), ft_error());
+			(free(grid), close(fd), ft_error("Failed to get next line"));
 		}
-		i++;
 	}
 	close(fd);
 	game->map.grid = grid;
 }
 
-void	print_map(t_game *game, char *map_dir)
+void	print_map(char *map_dir)
 {
 	int		fd;
 	char	*line;
 
-	(void)game;
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		ft_error();
+		ft_error("Invalid map dir");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -115,7 +114,7 @@ void	print_map_grid(t_game *game)
 			ft_putchar(game->map.grid[j][i]);
 			i++;
 		}
-		//putchar('\n');
+		// putchar('\n');
 		j++;
 	}
 }
