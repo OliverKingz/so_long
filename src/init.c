@@ -6,33 +6,33 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:43:40 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 21:27:29 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_game				init_game(t_game *game, char *map_dir);
-void				init_map(t_game *game, char *map_dir);
-void				init_texture(t_game *game);
-void				init_images(t_game *game);
-void				init_display(t_game *game);
-void				init_game_data(t_game *game);
-bool				display(t_game *game, mlx_image_t *tile, int x, int y);
-
 t_game	init_game(t_game *game, char *map_dir)
 {
+	int	height;
+	int	width;
+
 	init_texture(game);
 	init_map(game, map_dir);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	game->mlx = mlx_init((game->map.width - 1) * game->map.tile_size,
-			game->map.height * game->map.tile_size, "so_long", true);
+	height = game->map.height * game->map.t_size;
+	width = (game->map.width - 1) * game->map.t_size;
+	game->mlx = mlx_init(width, height, "so_long", true);
 	if (!game->mlx)
 		ft_mlx_err("Failed init MLX42");
+	mlx_set_window_size(game->mlx, width * 2, height * 2);
 	init_images(game);
 	init_display(game);
 	game->player.img = game->graphs.player;
 	game->moves = 0;
+	mlx_set_instance_depth(game->player.img->instances,
+		game->player.img->instances->z + 50);
+	mlx_set_window_limit(game->mlx, width, height, width * 4, height * 4);
 	return (*game);
 }
 
@@ -40,7 +40,7 @@ void	init_map(t_game *game, char *map_dir)
 {
 	game->map.width = 0;
 	game->map.height = 0;
-	game->map.tile_size = game->graphs.floor_t->width;
+	game->map.t_size = game->graphs.floor_t->width;
 	game->map.collect = 0;
 	game->map.is_valid = true;
 	read_map(game, map_dir);
@@ -90,9 +90,9 @@ void	init_display(t_game *game)
 		while (++i < game->map.width - 1)
 		{
 			p = game->map.grid[j][i];
-			if (p == 'P' && display(game, game->graphs.player, i, j))
+			if (p == 'P' && display(game, game->graphs.floor, i, j))
 				game->player.x = i;
-			if (p == 'P')
+			if (p == 'P' && display(game, game->graphs.player, i, j))
 				game->player.y = j;
 			else if (p == '0')
 				display(game, game->graphs.floor, i, j);
@@ -104,15 +104,4 @@ void	init_display(t_game *game)
 				display(game, game->graphs.exit, i, j);
 		}
 	}
-}
-
-bool	display(t_game *game, mlx_image_t *tile, int x, int y)
-{
-	int	window_image;
-
-	window_image = mlx_image_to_window(game->mlx, tile, game->map.tile_size * x,
-			game->map.tile_size * y);
-	if (window_image < 0)
-		return (ft_mlx_err("Failed displaying image"), false);
-	return (true);
 }

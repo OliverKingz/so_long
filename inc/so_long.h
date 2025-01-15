@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:41:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 22:08:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_map
 	char			**grid;
 	int				width;
 	int				height;
-	int				tile_size;
+	int				t_size;
 	int				collect;
 	bool			is_valid;
 }					t_map;
@@ -64,6 +64,7 @@ typedef struct s_game
 	t_entity		player;
 	mlx_t			*mlx;
 	int				moves;
+	bool			is_running;
 }					t_game;
 
 void				ft_hook(void *param);
@@ -75,7 +76,10 @@ void				init_map(t_game *game, char *map_dir);
 void				init_texture(t_game *game);
 void				init_images(t_game *game);
 void				init_display(t_game *game);
+
 bool				display(t_game *game, mlx_image_t *tile, int x, int y);
+void				move(t_game *game, int dx, int dy);
+// bool	display_text(t_game *game, mlx_image_t *text_img, int x, int y):
 
 void				read_map(t_game *game, char *map_dir);
 void				make_map_grid(t_game *game, char *map_dir);

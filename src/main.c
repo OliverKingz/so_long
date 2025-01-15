@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:50:00 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 22:11:10 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	ft_hook(void *param)
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
-		game->player.img->instances[0].y -= game->map.tile_size;
+		move(game, 0, -1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
-		game->player.img->instances[0].y += game->map.tile_size;
+		move(game, 0, 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_A))
-		game->player.img->instances[0].x -= game->map.tile_size;
+		move(game, -1, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
-		game->player.img->instances[0].x += game->map.tile_size;
+		move(game, 1, 0);
 }
 
 void	ft_mlx_err(const char *msg)
@@ -81,9 +81,14 @@ int32_t	main(int argc, char **argv)
 	game = init_game(&game, argv[1]);
 	print_map_grid(&game);
 	ft_putstr("\n\n");
+	ft_printf("Moves: %d\n", game.moves);
+	mlx_put_string(game.mlx, "Moves: ", 5, 5);
 	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
-	free_game(&game);
-	mlx_terminate(game.mlx);
+	if (game.is_running == false)
+	{
+		free_game(&game);
+		mlx_terminate(game.mlx);
+	}
 	return (EXIT_SUCCESS);
 }

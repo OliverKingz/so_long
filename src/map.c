@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:35:21 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:56:26 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,39 +31,6 @@ void	read_map(t_game *game, char *map_dir)
 	}
 	close(fd);
 }
-
-// void	read_map(t_game *game, char *map_dir)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	int		row;
-
-// 	game->map.is_valid = true;
-// 	fd = open(map_dir, O_RDONLY);
-// 	if (fd == -1)
-// 		ft_mlx_err("Invalid map direction");
-// 	row = 0;
-// 	line = get_next_line(fd);
-// 	if (line != NULL)
-// 	{
-// 		game->map.width = ft_strlen(line);
-// 		row++;
-// 		free(line);
-// 	}
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 			break ;
-// 		else
-// 			row++;
-// 		if (game->map.width != (int)ft_strlen(line))
-// 			game->map.is_valid = false;
-// 		free(line);
-// 	}
-// 	(free(line), close(fd));
-// 	game->map.height = row;
-// }
 
 void	make_map_grid(t_game *game, char *map_dir)
 {
