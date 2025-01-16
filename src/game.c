@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 23:26:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:34:18 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	move(t_game *game, int dx, int dy)
 		{
 			ft_printf("You win!\n");
 			game->is_running = false;
+			mlx_close_window(game->mlx);
 		}
 		return ;
 	}

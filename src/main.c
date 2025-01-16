@@ -6,13 +6,13 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 23:36:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:41:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_key_hook(void *param)
+void	ft_loop_hook(void *param)
 {
 	t_game	*game;
 
@@ -102,7 +102,7 @@ int32_t	main(int argc, char **argv)
 	print_map_grid(&game);
 	if (game.is_running == true)
 	{
-		mlx_loop_hook(game.mlx, ft_key_hook, &game);
+		mlx_loop_hook(game.mlx, ft_loop_hook, &game);
 		//mlx_key_hook(game.mlx, ft_key_hook, &game);
 		mlx_loop(game.mlx);
 	}

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 23:26:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:40:53 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ t_game	init_game(t_game *game, char *map_dir)
 	init_display_player(game);
 	game->moves = 0;
 	game->is_running = true;
-	// mlx_set_instance_depth(game->player.img->instances,
-	// 	game->player.img->instances->z + (game->map.height * game->map.width));
 	mlx_set_window_limit(game->mlx, width, height, width * 4, height * 4);
 	return (*game);
 }
@@ -72,7 +70,7 @@ void	init_display(t_game *game)
 {
 	int		j;
 	int		i;
-	char	p;
+	char	point;
 
 	j = -1;
 	while (++j < game->map.height)
@@ -80,14 +78,14 @@ void	init_display(t_game *game)
 		i = -1;
 		while (++i < game->map.width)
 		{
-			p = game->map.grid[j][i];
-			if (p == '0' || p == 'P')
+			point = game->map.grid[j][i];
+			if (point == '0' || point == 'P')
 				display(game, game->graphs.floor, i, j);
-			else if (p == '1')
+			else if (point == '1')
 				display(game, game->graphs.wall, i, j);
-			else if (p == 'C' && display(game, game->graphs.collect, i, j))
+			else if (point == 'C' && display(game, game->graphs.collect, i, j))
 				game->map.collect++;
-			else if (p == 'E')
+			else if (point == 'E')
 				display(game, game->graphs.exit, i, j);
 		}
 	}
@@ -97,7 +95,7 @@ void	init_display_player(t_game *game)
 {
 	int		j;
 	int		i;
-	char	p;
+	char	point;
 
 	game->player.img = game->graphs.player;
 	j = -1;
@@ -106,10 +104,10 @@ void	init_display_player(t_game *game)
 		i = -1;
 		while (++i < game->map.width)
 		{
-			p = game->map.grid[j][i];
-			if (p == 'P' && display(game, game->player.img, i, j))
+			point = game->map.grid[j][i];
+			if (point == 'P' && display(game, game->player.img, i, j))
 				game->player.x = i;
-			if (p == 'P')
+			if (point == 'P')
 				game->player.y = j;
 		}
 	}

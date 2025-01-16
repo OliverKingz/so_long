@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/14 20:32:12 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/16 14:39:21 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,10 +162,11 @@ debug: CFLAGS += -g3 -fsanitize=address
 debug: re
 	@echo "\t\t\t$(BOLD_BLUE)Debug build complete $(DEF_COLOR)"
 
-# valgrind: $(NAME)
-# 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+valgrind: CFLAGS += -g3
+valgrind: re
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
 
 # Phony targets
-.PHONY: all clean fclean re libmlx libft norm show info debug
+.PHONY: all clean fclean re libmlx libft norm show info debug valgrind
 
 # **************************************************************************** #

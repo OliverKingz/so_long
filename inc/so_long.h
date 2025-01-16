@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/15 23:36:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:20:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ typedef struct s_game
 	bool			is_running;
 }					t_game;
 
-void				ft_key_hook(void *param);
-//mlx_keyfunc			ft_key_hook(void *param)
+void				ft_loop_hook(void *param);
+mlx_keyfunc			ft_key_hook(void *param);
 void				ft_mlx_err(const char *msg);
 void				free_game(t_game *game);
 
