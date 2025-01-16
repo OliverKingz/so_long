@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 14:20:00 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:20:17 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_game
 }					t_game;
 
 void				ft_loop_hook(void *param);
-mlx_keyfunc			ft_key_hook(void *param);
+void				ft_key_hook(mlx_key_data_t keydata, void *param);
 void				ft_mlx_err(const char *msg);
 void				free_game(t_game *game);
 
@@ -82,6 +82,8 @@ void				init_display_player(t_game *game);
 bool				display(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
 void				move(t_game *game, int dx, int dy);
+bool				allow_to_move(t_game *game, int new_x, int new_y,
+						char next_tile);
 
 void				init_map(t_game *game, char *map_dir);
 void				read_map(t_game *game, char *map_dir);

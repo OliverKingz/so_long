@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 14:40:53 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:19:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ t_game	init_game(t_game *game, char *map_dir)
 		ft_mlx_err("Failed init MLX42");
 	mlx_set_window_size(game->mlx, width * 2, height * 2);
 	init_images(game);
-	init_display(game);
 	init_display_player(game);
+	init_display(game);
+	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
 	game->moves = 0;
 	game->is_running = true;
 	mlx_set_window_limit(game->mlx, width, height, width * 4, height * 4);
@@ -56,14 +57,37 @@ void	init_texture(t_game *game)
 
 void	init_images(t_game *game)
 {
-	game->graphs.player = mlx_texture_to_image(game->mlx,
-			game->graphs.player_t);
+	game->player.img = mlx_texture_to_image(game->mlx, game->graphs.player_t);
+	game->graphs.player = game->player.img;
 	game->graphs.floor = mlx_texture_to_image(game->mlx, game->graphs.floor_t);
 	game->graphs.wall = mlx_texture_to_image(game->mlx, game->graphs.wall_t);
 	game->graphs.collect = mlx_texture_to_image(game->mlx,
 			game->graphs.collect_t);
 	game->graphs.exit = mlx_texture_to_image(game->mlx, game->graphs.exit_t);
-	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
+}
+
+void	init_display_player(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < game->map.height)
+	{
+		j = 0;
+		while (j < game->map.width)
+		{
+			if (game->map.grid[i][j] == 'P')
+			{
+				game->player.x = j;
+				game->player.y = i;
+				game->player.img = game->graphs.player;
+				display(game, game->player.img, j, i);
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	init_display(t_game *game)
@@ -89,29 +113,5 @@ void	init_display(t_game *game)
 				display(game, game->graphs.exit, i, j);
 		}
 	}
+	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
 }
-
-void	init_display_player(t_game *game)
-{
-	int		j;
-	int		i;
-	char	point;
-
-	game->player.img = game->graphs.player;
-	j = -1;
-	while (++j < game->map.height)
-	{
-		i = -1;
-		while (++i < game->map.width)
-		{
-			point = game->map.grid[j][i];
-			if (point == 'P' && display(game, game->player.img, i, j))
-				game->player.x = i;
-			if (point == 'P')
-				game->player.y = j;
-		}
-	}
-	mlx_set_instance_depth(game->player.img->instances,
-		game->player.img->instances->z++);
-}
-

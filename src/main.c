@@ -6,40 +6,22 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 14:41:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:30:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_loop_hook(void *param)
-{
-	t_game	*game;
-
-	game = param;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(game->mlx);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
-		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
-		move(game, 0, -1);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)
-		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
-		move(game, 0, 1);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move(game, -1, 0);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move(game, 1, 0);
-}
-
-// mlx_keyfunc	ft_key_hook(void *param)
+// void	ft_loop_hook(void *param)
 // {
 // 	t_game	*game;
 
 // 	game = param;
 // 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+// 	{
+// 		free_game(game);
 // 		mlx_close_window(game->mlx);
+// 	}
 // 	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
 // 		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
 // 		move(game, 0, -1);
@@ -54,10 +36,32 @@ void	ft_loop_hook(void *param)
 // 		move(game, 1, 0);
 // }
 
+void	ft_key_hook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+
+	game = param;
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_ESCAPE)
+		{
+			free_game(game);
+			mlx_close_window(game->mlx);
+		}
+		if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
+			move(game, 0, -1);
+		if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
+			move(game, 0, 1);
+		if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
+			move(game, -1, 0);
+		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
+			move(game, 1, 0);
+	}
+}
+
 void	ft_mlx_err(const char *msg)
 {
-	//ft_putstr_fd("Error\n", 2);
-	perror("Error");
+	ft_putstr_fd("Error\n", 2);
 	if (msg)
 		ft_putstr_fd((char *)msg, 2);
 	if (mlx_errno != 0)
@@ -102,11 +106,9 @@ int32_t	main(int argc, char **argv)
 	print_map_grid(&game);
 	if (game.is_running == true)
 	{
-		mlx_loop_hook(game.mlx, ft_loop_hook, &game);
-		//mlx_key_hook(game.mlx, ft_key_hook, &game);
+		mlx_key_hook(game.mlx, &ft_key_hook, &game);
 		mlx_loop(game.mlx);
 	}
-	free_game(&game);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
