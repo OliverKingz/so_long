@@ -6,7 +6,7 @@
 /*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 22:33:39 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 00:42:37 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_game
 
 void				ft_key_hook(mlx_key_data_t keydata, void *param);
 void				ft_mlx_err(const char *msg);
+void				free_map_grid(t_game *game);
 void				free_game(t_game *game);
 
 t_game				init_game(t_game *game, char *map_dir);
@@ -78,7 +79,7 @@ void				init_images(t_game *game);
 void				init_display(t_game *game);
 void				init_display_player(t_game *game);
 
-bool				display(t_game *game, mlx_image_t *tile, int x, int y);
+void				display(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
 void				move(t_game *game, int dx, int dy);
 bool				allow_to_move(t_game *game, int new_x, int new_y,
@@ -89,5 +90,9 @@ void				read_map(t_game *game, char *map_dir);
 void				make_map_grid(t_game *game, char *map_dir);
 void				print_map(char *map_dir);
 void				print_map_grid(t_game *game);
+
+void				check_map_file(char *map_dir);
+void				check_map_elements(t_game *game);
+void				check_map_enclosed(t_game *game);
 
 #endif

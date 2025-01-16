@@ -6,7 +6,7 @@
 /*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 22:33:17 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 00:44:07 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_mlx_err(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	free_game(t_game *game)
+void	free_map_grid(t_game *game)
 {
 	int	i;
 
@@ -59,6 +59,11 @@ void	free_game(t_game *game)
 		i++;
 	}
 	free(game->map.grid);
+}
+
+void	free_game(t_game *game)
+{
+	free_map_grid(game);
 	mlx_delete_image(game->mlx, game->graphs.player);
 	mlx_delete_image(game->mlx, game->graphs.floor);
 	mlx_delete_image(game->mlx, game->graphs.wall);

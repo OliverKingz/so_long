@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 17:19:52 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 23:41:53 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	init_display(t_game *game)
 {
 	int		j;
 	int		i;
-	char	point;
+	char	tile;
 
 	j = -1;
 	while (++j < game->map.height)
@@ -102,14 +102,14 @@ void	init_display(t_game *game)
 		i = -1;
 		while (++i < game->map.width)
 		{
-			point = game->map.grid[j][i];
-			if (point == '0' || point == 'P')
+			tile = game->map.grid[j][i];
+			if (tile == '0' || tile == 'P')
 				display(game, game->graphs.floor, i, j);
-			else if (point == '1')
+			else if (tile == '1')
 				display(game, game->graphs.wall, i, j);
-			else if (point == 'C' && display(game, game->graphs.collect, i, j))
-				game->map.collect++;
-			else if (point == 'E')
+			else if (tile == 'C')
+				display(game, game->graphs.collect, i, j);
+			else if (tile == 'E')
 				display(game, game->graphs.exit, i, j);
 		}
 	}

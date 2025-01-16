@@ -6,13 +6,13 @@
 /*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 22:33:29 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 00:42:50 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	display(t_game *game, mlx_image_t *tile, int x, int y)
+void	display(t_game *game, mlx_image_t *tile, int x, int y)
 {
 	int32_t	i_instance;
 
