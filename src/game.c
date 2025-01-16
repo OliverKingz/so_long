@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 17:24:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:33:29 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,3 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 	}
 	return (true);
 }
-
-// mlx_delete_image(game->mlx, game->player.img);
-// game->player.img = mlx_texture_to_image(game->mlx, game->graphs.player_t);
-// display(game, game->player.img, new_x, new_y);

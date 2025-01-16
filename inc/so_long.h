@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 17:20:17 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:33:39 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_game
 	bool			is_running;
 }					t_game;
 
-void				ft_loop_hook(void *param);
 void				ft_key_hook(mlx_key_data_t keydata, void *param);
 void				ft_mlx_err(const char *msg);
 void				free_game(t_game *game);

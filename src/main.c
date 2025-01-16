@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/16 17:30:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:33:17 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// void	ft_loop_hook(void *param)
-// {
-// 	t_game	*game;
-
-// 	game = param;
-// 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-// 	{
-// 		free_game(game);
-// 		mlx_close_window(game->mlx);
-// 	}
-// 	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
-// 		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
-// 		move(game, 0, -1);
-// 	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)
-// 		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
-// 		move(game, 0, 1);
-// 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)
-// 		|| mlx_is_key_down(game->mlx, MLX_KEY_A))
-// 		move(game, -1, 0);
-// 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)
-// 		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
-// 		move(game, 1, 0);
-// }
 
 void	ft_key_hook(mlx_key_data_t keydata, void *param)
 {
