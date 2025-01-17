@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/17 15:46:44 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/17 16:07:43 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,24 +23,24 @@ LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
 # **************************************************************************** #
 # FILES
-SRC_FILES := $(wildcard $(SRC_DIR)*.c)
+SRC_FILES	:= $(wildcard $(SRC_DIR)*.c)
 
 # INCLUDE FILES
-INC_FILES := so_long
+INC_FILES	:= so_long
 
 # GENERAL FILES
-SRCS    := $(SRC_FILES)
-OBJS    := $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
-DEPS    := $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.d)))
-INCS    := $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
+SRCS	:= $(SRC_FILES)
+OBJS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
+DEPS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.d)))
+INCS	:= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
 INCS	+= $(LIBFT_INC_DIR)libft.h
 INCS	+= $(LIBMLX_INC_DIR)
 
 # **************************************************************************** #
 # PROJECT
-NAME  := so_long
-LIBFT := $(LIBFT_DIR)libft.a
-LIBMLX := $(LIBMLX_DIR)build/libmlx42.a
+NAME	:= so_long
+LIBFT	:= $(LIBFT_DIR)libft.a
+LIBMLX	:= $(LIBMLX_DIR)build/libmlx42.a
 
 # **************************************************************************** #
 # COMPILER
@@ -56,12 +56,13 @@ LDFLAGS	+= $(LIBMLX) -ldl -lglfw -pthread -lm
 # **************************************************************************** #
 # COLOURS
 
-BOLD_RED   = \033[1;31m
-BOLD_GREEN = \033[1;32m
-BOLD_BLUE  = \033[1;34m
+BOLD_RED	= \033[1;31m
+BOLD_GREEN	= \033[1;32m
+BOLD_BLUE	= \033[1;34m
+BOLD_YELLOW	= \033[1;33m
 
-DEF_COLOR  = \033[0;39m
-CLEAR_LINE = \033[2K
+DEF_COLOR	= \033[0;39m
+CLEAR_LINE	= \033[2K
 
 # **************************************************************************** #
 # RULES
@@ -147,10 +148,11 @@ info:
 
 debug: CFLAGS += -g3 -fsanitize=address
 debug: clean all
-	@echo "\t\t\t$(BOLD_BLUE)[DEBUG MODE]$(DEF_COLOR)"
+	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE]$(DEF_COLOR)"
 
 valgrind: CFLAGS += -g3W
 valgrind: clean all
+	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
 
 # Phony targets
