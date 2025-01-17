@@ -6,7 +6,7 @@
 /*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 00:42:37 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 01:05:30 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void				print_map_grid(t_game *game);
 void				check_map_file(char *map_dir);
 void				check_map_elements(t_game *game);
 void				check_map_enclosed(t_game *game);
+void				check_map_solvable(t_game *game);
 
 #endif

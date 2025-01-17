@@ -6,7 +6,7 @@
 /*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 00:39:23 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 01:05:53 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_map(t_game *game, char *map_dir)
 	make_map_grid(game, map_dir);
 	check_map_enclosed(game);
 	check_map_elements(game);
+	check_map_solvable(game);
 	if (!game->map.is_valid)
 		(free_map_grid(game), ft_mlx_err("Error parsing map"));
 }

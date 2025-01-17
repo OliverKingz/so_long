@@ -9,6 +9,7 @@
  * - Is there only one exit ? Simply count how many E you find on the map.
  * - Is there only one start position ? Simply count how many P you find on the map.
  * - Is there at least one collectibles ? Simply count how many C you find on the map.
+ * - Is the map solvable? Is there a way valid way?
  */
 
 void	check_map_file(char *map_dir)
@@ -84,4 +85,47 @@ void	check_map_enclosed(t_game *game)
 		}
 		j++;
 	}
+}
+
+void	check_map_solvable(t_game *game);
+
+// void	fill(char **tab, t_point size, t_point begin, char to_fill)
+// {
+// 	if(begin.x < 0 || begin.x >= size.x
+// 		|| begin.y < 0 || begin.y >= size.y
+// 		|| tab[begin.y][begin.x] != to_fill)
+// 		return ;
+
+// 	tab[begin.y][begin.x] = 'F';
+// 	fill(tab, size, (t_point){begin.x + 1, begin.y}, to_fill);
+// 	fill(tab, size, (t_point){begin.x - 1, begin.y}, to_fill);
+// 	fill(tab, size, (t_point){begin.x, begin.y + 1}, to_fill);
+// 	fill(tab, size, (t_point){begin.x, begin.y - 1}, to_fill);
+// }
+
+// void  flood_fill(char **tab, t_point size, t_point begin)
+// {
+// 	fill(tab, size, begin, tab[begin.y][begin.x]);
+// }
+
+void	fill(t_game *game, int begin_x, int begin_y, char to_fill)
+{
+	if (begin_x < 0 || begin_x >= game->map.width
+		|| begin_y < 0 || begin_y >= game->map.height
+		|| game->map.grid[begin_y][begin_x] != to_fill)
+		return ;
+
+	game->map.grid[begin_y][begin_x] = 'P';
+	fill(game, begin_x + 1, begin_y, to_fill);
+	fill(game, begin_x - 1, begin_y, to_fill);
+	fill(game, begin_x, begin_y + 1, to_fill);
+	fill(game, begin_x, begin_y - 1, to_fill);
+}
+
+void  flood_fill(t_game *game, char *map_dir)
+{
+	fill(game, game->player.x, game->player.y, 'P');
+	print_map_grid(game);
+	free_map_grid(game);
+	make_map_grid(game, map_dir);
 }
