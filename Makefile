@@ -6,17 +6,9 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/17 15:37:09 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/17 15:46:44 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# **************************************************************************** #
-# COMMANDS
-MKDIR		:= mkdir -p
-RM			:= rm -rf
-PRINTF		:= printf "%b"
-MAKE_LIB	:= make -sC
-CP			:= cp -p
 
 # **************************************************************************** #
 # DIRECTORIES
@@ -80,40 +72,40 @@ all: $(LIBMLX) $(LIBFT) $(NAME)
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(MKDIR) $(dir $@)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 # Rule to create the program
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
 
 # Rule to make the library Libft
 libft: $(LIBFT)
 $(LIBFT):
-	@$(MAKE_LIB) $(LIBFT_DIR)
+	@$(MAKE) -sC $(LIBFT_DIR)
 
 # Rule to make the library Libmlx
 libmlx: $(LIBMLX)
 $(LIBMLX):
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[42-codam's LibMLX]:\t" \
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[42-codam's LibMLX]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)CREATED$(DEF_COLOR)\n"
 
 # Rule to clean generated files
 clean:
-	@$(RM) $(OBJ_DIR)
-	@make clean -sC $(LIBFT_DIR)
-	@$(RM) $(LIBMLX_DIR)/build
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) clean -sC $(LIBFT_DIR)
+	@rm -rf $(LIBMLX_DIR)/build
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)OBJECTS CLEANED$(DEF_COLOR)\n"
 
 # Rule to clean generated files and the executablle
 fclean: 
-	@make clean > /dev/null
-	@make fclean -sC $(LIBFT_DIR)
-	@$(PRINTF) "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
+	@$(MAKE) clean > /dev/null
+	@$(MAKE) fclean -sC $(LIBFT_DIR)
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)FULLY CLEANED$(DEF_COLOR)\n"
 
 # Rule to recompile from zero. 
@@ -128,7 +120,7 @@ show:
 		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)so_long.c -o $(OBJ_DIR)so_long.o"
 	@echo "Linking command:\t"\
 		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
-	@echo "Cleaning command:\t $(RM) $(OBJ_DIR)" $(NAME)
+	@echo "Cleaning command:\t rm -rf $(OBJ_DIR)" $(NAME)
 
 info:
 	@echo "NAME: $(NAME)"
@@ -138,11 +130,6 @@ info:
 	@echo "CFLAGS: $(CFLAGS)"
 	@echo "IFLAGS: $(IFLAGS)"
 	@echo "LDFLAGS: $(LDFLAGS)"
-	@echo "MKDIR: $(MKDIR)"
-	@echo "RM: $(RM)"
-	@echo "PRINTF: $(PRINTF)"
-	@echo "MAKE_LIB: $(MAKE_LIB)"
-	@echo "CP: $(CP)"
 	@echo "SRC_DIR: $(SRC_DIR)"
 	@echo "INC_DIR: $(INC_DIR)"
 	@echo "OBJ_DIR: $(OBJ_DIR)"
@@ -162,8 +149,8 @@ debug: CFLAGS += -g3 -fsanitize=address
 debug: clean all
 	@echo "\t\t\t$(BOLD_BLUE)[DEBUG MODE]$(DEF_COLOR)"
 
-valgrind: CFLAGS += -g3
-valgrind: re
+valgrind: CFLAGS += -g3W
+valgrind: clean all
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
 
 # Phony targets
