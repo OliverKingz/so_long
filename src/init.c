@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 10:57:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:04:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_game	init_game(t_game *game, char *map_dir)
 	if (!game->mlx)
 		ft_mlx_err("Failed init MLX42");
 	mlx_set_window_size(game->mlx, width * 2, height * 2);
+	mlx_set_icon(game->mlx, game->graphs.player_t);
 	init_images(game);
 	init_display_player(game);
 	init_display(game);
@@ -82,7 +83,7 @@ void	init_display_player(t_game *game)
 				game->player.x = j;
 				game->player.y = i;
 				game->player.img = game->graphs.player;
-				display(game, game->player.img, j, i);
+				display_img(game, game->player.img, j, i);
 			}
 			j++;
 		}
@@ -104,13 +105,13 @@ void	init_display(t_game *game)
 		{
 			tile = game->map.grid[j][i];
 			if (tile == '0' || tile == 'P')
-				display(game, game->graphs.floor, i, j);
+				display_img(game, game->graphs.floor, i, j);
 			else if (tile == '1')
-				display(game, game->graphs.wall, i, j);
+				display_img(game, game->graphs.wall, i, j);
 			else if (tile == 'C')
-				display(game, game->graphs.collect, i, j);
+				display_img(game, game->graphs.collect, i, j);
 			else if (tile == 'E')
-				display(game, game->graphs.exit, i, j);
+				display_img(game, game->graphs.exit, i, j);
 		}
 	}
 	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);

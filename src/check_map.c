@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 15:28:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:52:27 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,44 @@ void	check_map_enclosed(t_game *game)
 	}
 }
 
-void	check_map_solvable(t_game *game);
+void	flood_fill(t_game *game, int x, int y)
+{
+	if (x < 0 || x >= game->map.width
+		|| y < 0 || y >= game->map.height)
+		return ;
+	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'X') // Already visited or wall
+		return;
+	if (game->map.grid[y][x] != '0' && game->map.grid[y][x] != 'C' && game->map.grid[y][x] != 'E')
+		return;
+	game->map.grid[y][x] = 'X';
+	flood_fill(game, x + 1, y);
+	flood_fill(game, x - 1, y);
+	flood_fill(game, x, y + 1);
+	flood_fill(game, x, y - 1);
+}
+
+void	check_map_solvable(t_game *game, char *map_dir)
+{
+	flood_fill(game, game->player.x, game->player.y);
+
+	print_map_grid(game);
+	ft_putchar('\n');
+
+	int y, x;
+	for (y = 0; y < game->map.height; y++)
+	{
+		for (x = 0; x < game->map.width; x++)
+		{
+			if (game->map.grid[y][x] == 'C' || game->map.grid[y][x] == 'E')
+			{
+				free_map_grid(game);
+				ft_mlx_err("Invalid map: not all collectibles or exit are reachable");
+			}
+		}
+	}
+	free_map_grid(game);
+	make_map_grid(game, map_dir);
+}
 
 // void	fill(char **tab, t_point size, t_point begin, char to_fill)
 // {
@@ -115,26 +152,4 @@ void	check_map_solvable(t_game *game);
 // void  flood_fill(char **tab, t_point size, t_point begin)
 // {
 // 	fill(tab, size, begin, tab[begin.y][begin.x]);
-// }
-
-// void	fill(t_game *game, int begin_x, int begin_y, char to_fill)
-// {
-// 	if (begin_x < 0 || begin_x >= game->map.width
-// 		|| begin_y < 0 || begin_y >= game->map.height
-// 		|| game->map.grid[begin_y][begin_x] != to_fill)
-// 		return ;
-
-// 	game->map.grid[begin_y][begin_x] = 'P';
-// 	fill(game, begin_x + 1, begin_y, to_fill);
-// 	fill(game, begin_x - 1, begin_y, to_fill);
-// 	fill(game, begin_x, begin_y + 1, to_fill);
-// 	fill(game, begin_x, begin_y - 1, to_fill);
-// }
-
-// void  flood_fill(t_game *game, char *map_dir)
-// {
-// 	fill(game, game->player.x, game->player.y, 'P');
-// 	print_map_grid(game);
-// 	free_map_grid(game);
-// 	make_map_grid(game, map_dir);
 // }
