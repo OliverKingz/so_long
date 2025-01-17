@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/17 16:07:43 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/17 16:08:52 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,7 +150,7 @@ debug: CFLAGS += -g3 -fsanitize=address
 debug: clean all
 	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE]$(DEF_COLOR)"
 
-valgrind: CFLAGS += -g3W
+valgrind: CFLAGS += -g3
 valgrind: clean all
 	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
