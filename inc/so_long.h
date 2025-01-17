@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 01:05:30 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 15:26:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ void				check_map_file(char *map_dir);
 void				check_map_elements(t_game *game);
 void				check_map_enclosed(t_game *game);
 void				check_map_solvable(t_game *game);
+
+void				check_map_elements_aux(t_game *game,
+						int exit_count, int player_count);
 
 #endif

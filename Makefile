@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/16 14:39:21 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/17 15:37:09 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,8 +159,8 @@ info:
 	@echo "INCS: $(INCS)"
 
 debug: CFLAGS += -g3 -fsanitize=address
-debug: re
-	@echo "\t\t\t$(BOLD_BLUE)Debug build complete $(DEF_COLOR)"
+debug: clean all
+	@echo "\t\t\t$(BOLD_BLUE)[DEBUG MODE]$(DEF_COLOR)"
 
 valgrind: CFLAGS += -g3
 valgrind: re

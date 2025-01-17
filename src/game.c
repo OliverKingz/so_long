@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 00:42:50 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 11:28:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	display(t_game *game, mlx_image_t *tile, int x, int y)
 	i_instance = mlx_image_to_window(game->mlx, tile, game->map.t_size * x,
 			game->map.t_size * y);
 	if (i_instance < 0)
-		return (ft_mlx_err("Failed displaying image"), false);
+		(free_game(game), ft_mlx_err("Failed displaying image"));
 	mlx_set_instance_depth(game->player.img->instances,
 		tile->instances[i_instance].z + 2);
-	return (true);
 }
 
 void	display_text(t_game *game)

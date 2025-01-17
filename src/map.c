@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 01:05:53 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/17 15:26:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_map(t_game *game, char *map_dir)
 	make_map_grid(game, map_dir);
 	check_map_enclosed(game);
 	check_map_elements(game);
-	check_map_solvable(game);
 	if (!game->map.is_valid)
 		(free_map_grid(game), ft_mlx_err("Error parsing map"));
 }
@@ -33,7 +32,7 @@ void	read_map(t_game *game, char *map_dir)
 {
 	int		fd;
 	char	*line;
-	size_t	line_len;
+	int		line_len;
 
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
@@ -61,7 +60,7 @@ void	make_map_grid(t_game *game, char *map_dir)
 {
 	int		fd;
 	char	**grid;
-	int		i;
+	int		j;
 
 	grid = malloc(game->map.height * sizeof(char *));
 	if (!grid)
@@ -69,13 +68,13 @@ void	make_map_grid(t_game *game, char *map_dir)
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
 		(free(grid), ft_mlx_err("Error opening map file"));
-	i = -1;
-	while (++i < game->map.height)
+	j = -1;
+	while (++j < game->map.height)
 	{
-		grid[i] = get_next_line(fd);
-		if (grid[i] == NULL)
+		grid[j] = get_next_line(fd);
+		if (grid[j] == NULL)
 		{
-			while (i-- > 0)
+			while (j-- > 0)
 				free(grid[j]);
 			(free(grid), close(fd), ft_mlx_err("Error to get next line"));
 		}

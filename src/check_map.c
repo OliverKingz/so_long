@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/01/17 15:28:09 by ozamora-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 /**
@@ -5,10 +17,10 @@
  * - Does the map file exist ? Looking fd result when opened, reason in perror
  * - Is the map rectangular ? All the lines should be the same length.
  * - Is there something in the map file ?
- * - Is the map enclosed in walls ? Check the first and last lines and columns, they should all be 1. 
+ * - Is the map enclosed in walls ? Check the first and last lines and columns 
  * - Is there only one exit ? Simply count how many E you find on the map.
- * - Is there only one start position ? Simply count how many P you find on the map.
- * - Is there at least one collectibles ? Simply count how many C you find on the map.
+ * - Is there only one start position ? Simply count how many P on the map.
+ * - Is there at least one collectibles ? Simply count how many C on the map.
  * - Is the map solvable? Is there a way valid way?
  */
 
@@ -36,6 +48,8 @@ void	check_map_elements(t_game *game)
 	int	exit_counter;
 	int	player_counter;
 
+	exit_counter = 0;
+	player_counter = 0;
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -50,12 +64,7 @@ void	check_map_elements(t_game *game)
 				player_counter++;
 		}
 	}
-	if (game->map.collect == 0)
-		(free_map_grid(game), ft_mlx_err("Invalid map: needs 1+ Collectibles"));
-	if (exit_counter != 1)
-		(free_map_grid(game), ft_mlx_err("Invalid map: needs 1x Exit only"));
-	if (player_counter != 1)
-		(free_map_grid(game), ft_mlx_err("Invalid map: needs 1x Player only"));
+	check_map_elements_aux(game, exit_counter, player_counter);
 }
 
 void	check_map_enclosed(t_game *game)
@@ -66,7 +75,7 @@ void	check_map_enclosed(t_game *game)
 	i = 0;
 	while (i < game->map.width)
 	{
-		if ((game->map.grid[0][i] != '1') 
+		if ((game->map.grid[0][i] != '1')
 			|| (game->map.grid[game->map.height - 1][i] != '1'))
 		{
 			free_map_grid(game);
@@ -77,7 +86,7 @@ void	check_map_enclosed(t_game *game)
 	j = 0;
 	while (j < game->map.height)
 	{
-		if ((game->map.grid[j][0] != '1') 
+		if ((game->map.grid[j][0] != '1')
 			|| (game->map.grid[j][game->map.width - 1] != '1'))
 		{
 			free_map_grid(game);
@@ -108,24 +117,24 @@ void	check_map_solvable(t_game *game);
 // 	fill(tab, size, begin, tab[begin.y][begin.x]);
 // }
 
-void	fill(t_game *game, int begin_x, int begin_y, char to_fill)
-{
-	if (begin_x < 0 || begin_x >= game->map.width
-		|| begin_y < 0 || begin_y >= game->map.height
-		|| game->map.grid[begin_y][begin_x] != to_fill)
-		return ;
+// void	fill(t_game *game, int begin_x, int begin_y, char to_fill)
+// {
+// 	if (begin_x < 0 || begin_x >= game->map.width
+// 		|| begin_y < 0 || begin_y >= game->map.height
+// 		|| game->map.grid[begin_y][begin_x] != to_fill)
+// 		return ;
 
-	game->map.grid[begin_y][begin_x] = 'P';
-	fill(game, begin_x + 1, begin_y, to_fill);
-	fill(game, begin_x - 1, begin_y, to_fill);
-	fill(game, begin_x, begin_y + 1, to_fill);
-	fill(game, begin_x, begin_y - 1, to_fill);
-}
+// 	game->map.grid[begin_y][begin_x] = 'P';
+// 	fill(game, begin_x + 1, begin_y, to_fill);
+// 	fill(game, begin_x - 1, begin_y, to_fill);
+// 	fill(game, begin_x, begin_y + 1, to_fill);
+// 	fill(game, begin_x, begin_y - 1, to_fill);
+// }
 
-void  flood_fill(t_game *game, char *map_dir)
-{
-	fill(game, game->player.x, game->player.y, 'P');
-	print_map_grid(game);
-	free_map_grid(game);
-	make_map_grid(game, map_dir);
-}
+// void  flood_fill(t_game *game, char *map_dir)
+// {
+// 	fill(game, game->player.x, game->player.y, 'P');
+// 	print_map_grid(game);
+// 	free_map_grid(game);
+// 	make_map_grid(game, map_dir);
+// }
