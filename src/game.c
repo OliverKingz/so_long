@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 19:15:34 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:44:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 	else if (next_tile == 'C')
 	{
 		game->map.collect--;
-		ft_printf("Items left: %d\n", game->map.collect);
+		ft_printf("Items left: 0%d\n", game->map.collect);
 		game->map.grid[new_y][new_x] = '0';
 		display_img(game, game->graphs.floor, new_x, new_y);
 		return (true);

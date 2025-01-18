@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:12:04 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 16:17:18 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:50:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_mlx_err(const char *msg)
 {
-	ft_putstr_fd("Error\n", 2);
+	//ft_putstr_fd("Error\n", 2);
+	perror("Error");
 	if (msg)
 		ft_putstr_fd((char *)msg, 2);
 	if (mlx_errno != 0)
@@ -38,9 +39,8 @@ void	free_map_grid(t_game *game)
 	free(game->map.grid);
 }
 
-void	free_game(t_game *game)
+void	free_graphs(t_game *game)
 {
-	free_map_grid(game);
 	mlx_delete_image(game->mlx, game->graphs.player);
 	mlx_delete_image(game->mlx, game->graphs.floor);
 	mlx_delete_image(game->mlx, game->graphs.wall);
@@ -52,4 +52,10 @@ void	free_game(t_game *game)
 	mlx_delete_texture(game->graphs.wall_t);
 	mlx_delete_texture(game->graphs.collect_t);
 	mlx_delete_texture(game->graphs.exit_t);
+}
+
+void	free_game(t_game *game)
+{
+	free_graphs(game);
+	free_map_grid(game);
 }

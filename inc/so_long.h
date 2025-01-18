@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 19:36:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:36:30 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_game				init_game(t_game *game, char *map_dir);
 void				init_texture(t_game *game);
 void				init_images(t_game *game);
 void				init_display(t_game *game);
-void				init_display_player(t_game *game);
+void				init_player(t_game *game);
 
 void				display_img(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
@@ -87,7 +87,7 @@ void				make_map_grid(t_game *game, char *map_dir);
 void				print_map(char *map_dir);
 void				print_map_grid(t_game *game);
 
-void				check_map_file(char *map_dir);
+void				check_map_file(t_game *game, char *map_dir);
 void				check_map_elements(t_game *game);
 void				check_map_enclosed(t_game *game);
 void				check_map_solvable(t_game *game, char *map_dir);
@@ -99,5 +99,6 @@ void				flood_fill(t_game *game, int x, int y);
 void				ft_mlx_err(const char *msg);
 void				free_map_grid(t_game *game);
 void				free_game(t_game *game);
+void				free_graphs(t_game *game);
 
 #endif

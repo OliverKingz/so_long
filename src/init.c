@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/17 19:04:14 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:16:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_game	init_game(t_game *game, char *map_dir)
 	mlx_set_window_size(game->mlx, width * 2, height * 2);
 	mlx_set_icon(game->mlx, game->graphs.player_t);
 	init_images(game);
-	init_display_player(game);
 	init_display(game);
 	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
 	game->moves = 0;
@@ -67,7 +66,7 @@ void	init_images(t_game *game)
 	game->graphs.exit = mlx_texture_to_image(game->mlx, game->graphs.exit_t);
 }
 
-void	init_display_player(t_game *game)
+void	init_player(t_game *game)
 {
 	int	i;
 	int	j;
@@ -83,7 +82,6 @@ void	init_display_player(t_game *game)
 				game->player.x = j;
 				game->player.y = i;
 				game->player.img = game->graphs.player;
-				display_img(game, game->player.img, j, i);
 			}
 			j++;
 		}
@@ -97,6 +95,7 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
+	display_img(game, game->player.img, game->player.x, game->player.y);
 	j = -1;
 	while (++j < game->map.height)
 	{
