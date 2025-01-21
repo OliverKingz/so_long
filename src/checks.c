@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 13:22:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:46:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	check_map_file(t_game *game, char *map_dir)
-{
-	int		fd;
-	char	buffer[1];
-	ssize_t	bytes_read;
-
-	if (ft_strlen(map_dir) <= 4 || ft_strrncmp(map_dir, ".ber", 4) != 0)
-		(free_textures(game), ft_mlx_err("Invalid map: needs .ber extension"));
-	fd = open(map_dir, O_RDONLY);
-	if (fd == -1)
-	{
-		free_textures(game);
-		ft_mlx_err("Invalid map: unable to open or doesn't exists");
-	}
-	bytes_read = read(fd, buffer, 1);
-	if (bytes_read == 0)
-	{
-		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: file is empty"));
-	}
-	else if (bytes_read == -1)
-	{
-		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: error reading"));
-	}
-	close(fd);
-}
 
 void	check_map_elements(t_game *game)
 {
@@ -63,7 +35,29 @@ void	check_map_elements(t_game *game)
 				player_counter++;
 		}
 	}
-	check_map_elements_aux(game, exit_counter, player_counter);
+	check_elements(game, exit_counter, player_counter);
+}
+
+void	check_elements(t_game *game, int exit_count, int player_count)
+{
+	if (game->map.item == 0)
+	{
+		game->map.is_valid = false;
+		(free_textures(game), free_map_grid(game));
+		ft_mlx_err("Invalid map: needs 1+ Collectibles");
+	}
+	if (exit_count != 1)
+	{
+		game->map.is_valid = false;
+		(free_textures(game), free_map_grid(game));
+		ft_mlx_err("Invalid map: needs 1x Exit only");
+	}
+	if (player_count != 1)
+	{
+		game->map.is_valid = false;
+		(free_textures(game), free_map_grid(game));
+		ft_mlx_err("Invalid map: needs 1x Player only");
+	}
 }
 
 void	check_map_enclosed(t_game *game)
@@ -117,4 +111,25 @@ void	check_map_solvable(t_game *game, char *map_dir)
 	game->map.item = item_count;
 	free_map_grid(game);
 	make_map_grid(game, map_dir);
+}
+
+void	flood_fill(t_game *game, int x, int y)
+{
+	if (x < 0 || x >= game->map.width
+		|| y < 0 || y >= game->map.height)
+		return ;
+	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'W'
+		|| game->map.grid[y][x] == 'E')
+	{
+		if (game->map.grid[y][x] == 'E')
+			game->map.is_valid = true;
+		return ;
+	}
+	if (game->map.grid[y][x] == 'C')
+		game->map.item--;
+	game->map.grid[y][x] = 'W';
+	flood_fill(game, x + 1, y);
+	flood_fill(game, x - 1, y);
+	flood_fill(game, x, y + 1);
+	flood_fill(game, x, y - 1);
 }

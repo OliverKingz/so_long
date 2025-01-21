@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:12:04 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:06:41 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:38:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ void	free_game(t_game *game)
 	free_textures(game);
 	free_map_grid(game);
 }
-

@@ -6,57 +6,11 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 13:22:06 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:44:02 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
-{
-	int32_t	i_instance;
-
-	i_instance = mlx_image_to_window(game->mlx, tile, game->map.t_size * x,
-			game->map.t_size * y);
-	if (i_instance < 0)
-		(free_game(game), ft_mlx_err("Failed displaying image"));
-	mlx_set_instance_depth(game->player.img->instances,
-		tile->instances[i_instance].z + 2);
-}
-
-void	display_text(t_game *game)
-{
-	char	*moves;
-
-	moves = ft_itoa(game->moves);
-	ft_printf("Moves made: %d\n", game->moves);
-	mlx_delete_image(game->mlx, game->graphs.text);
-	game->graphs.text = mlx_put_string(game->mlx, moves, 6, 4);
-	free(moves);
-}
-
-void	ft_key_hook(mlx_key_data_t keydata, void *param)
-{
-	t_game	*game;
-
-	game = param;
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-		{
-			free_game(game);
-			mlx_close_window(game->mlx);
-		}
-		if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
-			move(game, 0, -1);
-		if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
-			move(game, 0, 1);
-		if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
-			move(game, -1, 0);
-		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
-			move(game, 1, 0);
-	}
-}
 
 void	move(t_game *game, int dx, int dy)
 {
