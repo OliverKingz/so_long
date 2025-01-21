@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 11:56:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:04:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_game	init_game(t_game *game, char *map_dir)
 
 void	init_texture(t_game *game)
 {
-	game->graphs.player_t = mlx_load_png("./assets/sprites/OZ_Player.png");
+	game->graphs.player_t = mlx_load_png("./assets/sprites/OZ_Player_TR.png");
 	if (!game->graphs.player_t)
 		ft_mlx_err("Failed loading texture");
 	game->graphs.floor_t = mlx_load_png("./assets/sprites/OZ_Tile.png");

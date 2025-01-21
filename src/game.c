@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/18 16:44:57 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:09:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 			mlx_close_window(game->mlx);
 			return (true);
 		}
+		ft_printf("Items left: 0%d\n", game->map.collect);
 		return (false);
 	}
 	return (true);

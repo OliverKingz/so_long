@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:56:55 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:06:30 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:06:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	flood_fill(t_game *game, int x, int y)
 	if (x < 0 || x >= game->map.width
 		|| y < 0 || y >= game->map.height)
 		return ;
-	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'X'
+	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'W'
 		|| game->map.grid[y][x] == 'E')
 	{
 		if (game->map.grid[y][x] == 'E')
@@ -48,7 +48,7 @@ void	flood_fill(t_game *game, int x, int y)
 	}
 	if (game->map.grid[y][x] == 'C')
 		game->map.collect--;
-	game->map.grid[y][x] = 'X';
+	game->map.grid[y][x] = 'W';
 	flood_fill(game, x + 1, y);
 	flood_fill(game, x - 1, y);
 	flood_fill(game, x, y + 1);

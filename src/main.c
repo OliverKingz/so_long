@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:38:17 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:01:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int32_t	main(int argc, char **argv)
 		{
 			mlx_key_hook(game.mlx, &ft_key_hook, &game);
 			mlx_loop(game.mlx);
-			mlx_text
 		}
 		mlx_terminate(game.mlx);
 	}
