@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 13:04:14 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:06:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ void	init_texture(t_game *game)
 	game->graphs.wall_t = mlx_load_png("./assets/sprites/OZ_Tree_Orange.png");
 	if (!game->graphs.wall_t)
 		ft_mlx_err("Failed loading texture");
-	game->graphs.collect_t = mlx_load_png("./assets/sprites/OZ_Food.png");
-	if (!game->graphs.collect_t)
-		ft_mlx_err("Failed loading texture");
 	game->graphs.exit_t = mlx_load_png("./assets/sprites/OZ_House.png");
 	if (!game->graphs.exit_t)
+		ft_mlx_err("Failed loading texture");
+	game->graphs.item_t[0] = mlx_load_png("./assets/sprites/OZ_Food.png");
+	if (!game->graphs.item_t[0])
+		ft_mlx_err("Failed loading texture");
+	game->graphs.item_t[1] = mlx_load_png("./assets/sprites/OZ_Food_B.png");
+	if (!game->graphs.item_t[1])
 		ft_mlx_err("Failed loading texture");
 }
 
@@ -61,9 +64,11 @@ void	init_images(t_game *game)
 	game->graphs.player = game->player.img;
 	game->graphs.floor = mlx_texture_to_image(game->mlx, game->graphs.floor_t);
 	game->graphs.wall = mlx_texture_to_image(game->mlx, game->graphs.wall_t);
-	game->graphs.collect = mlx_texture_to_image(game->mlx,
-			game->graphs.collect_t);
 	game->graphs.exit = mlx_texture_to_image(game->mlx, game->graphs.exit_t);
+	game->graphs.item = mlx_texture_to_image(game->mlx,
+			game->graphs.item_t[0]);
+	game->graphs.b_item = mlx_texture_to_image(game->mlx,
+			game->graphs.item_t[1]);
 }
 
 void	init_player(t_game *game)
@@ -107,10 +112,12 @@ void	init_display(t_game *game)
 				display_img(game, game->graphs.floor, i, j);
 			else if (tile == '1')
 				display_img(game, game->graphs.wall, i, j);
-			else if (tile == 'C')
-				display_img(game, game->graphs.collect, i, j);
 			else if (tile == 'E')
 				display_img(game, game->graphs.exit, i, j);
+			if (tile == 'C')
+				display_img(game, game->graphs.b_item, i, j);
+			if (tile == 'C')
+				display_img(game, game->graphs.item, i, j);
 		}
 	}
 	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);

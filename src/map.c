@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:09:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:25:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_map(t_game *game, char *map_dir)
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.t_size = game->graphs.floor_t->width;
-	game->map.collect = 0;
+	game->map.item = 0;
 	game->map.is_valid = true;
 	check_map_file(game, map_dir);
 	read_map(game, map_dir);

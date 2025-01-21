@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 13:09:35 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:22:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 		return (false);
 	else if (next_tile == 'C')
 	{
-		game->map.collect--;
-		ft_printf("Items left: 0%d\n", game->map.collect);
+		game->map.item--;
+		ft_printf("Items left: 0%d\n", game->map.item);
 		game->map.grid[new_y][new_x] = '0';
 		display_img(game, game->graphs.floor, new_x, new_y);
 		return (true);
 	}
 	else if (next_tile == 'E')
 	{
-		if (game->map.collect == 0)
+		if (game->map.item == 0)
 		{
 			ft_printf("You win!\n");
 			game->is_running = false;
@@ -105,7 +105,7 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 			mlx_close_window(game->mlx);
 			return (true);
 		}
-		ft_printf("Items left: 0%d\n", game->map.collect);
+		ft_printf("Items left: 0%d\n", game->map.item);
 		return (false);
 	}
 	return (true);

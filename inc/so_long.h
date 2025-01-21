@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:04:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:06:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_map
 	int				width;
 	int				height;
 	int				t_size;
-	int				collect;
+	int				item;
 	bool			is_valid;
 }					t_map;
 
@@ -48,12 +48,13 @@ typedef struct s_graph
 	mlx_texture_t	*player_t;
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
-	mlx_texture_t	*collect_t;
+	mlx_texture_t	*item_t[2];
 	mlx_texture_t	*exit_t;
 	mlx_image_t		*player;
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
-	mlx_image_t		*collect;
+	mlx_image_t		*item;
+	mlx_image_t		*b_item;
 	mlx_image_t		*exit;
 	mlx_image_t		*text;
 }					t_graph;

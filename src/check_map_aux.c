@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:56:55 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 13:06:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:22:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_map_elements_aux(t_game *game, int exit_count, int player_count)
 {
-	if (game->map.collect == 0)
+	if (game->map.item == 0)
 	{
 		game->map.is_valid = false;
 		(free_textures(game), free_map_grid(game));
@@ -47,7 +47,7 @@ void	flood_fill(t_game *game, int x, int y)
 		return ;
 	}
 	if (game->map.grid[y][x] == 'C')
-		game->map.collect--;
+		game->map.item--;
 	game->map.grid[y][x] = 'W';
 	flood_fill(game, x + 1, y);
 	flood_fill(game, x - 1, y);

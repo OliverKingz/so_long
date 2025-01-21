@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:06:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:22:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_map_elements(t_game *game)
 		while (++i < game->map.width)
 		{
 			if (game->map.grid[j][i] == 'C')
-				game->map.collect++;
+				game->map.item++;
 			else if (game->map.grid[j][i] == 'E')
 				exit_counter++;
 			else if (game->map.grid[j][i] == 'P')
@@ -97,14 +97,14 @@ void	check_map_enclosed(t_game *game)
 
 void	check_map_solvable(t_game *game, char *map_dir)
 {
-	int	collect_count;
+	int	item_count;
 
-	collect_count = game->map.collect;
+	item_count = game->map.item;
 	game->map.is_valid = false;
 	flood_fill(game, game->player.x, game->player.y);
 	print_map_grid(game);
 	ft_putchar('\n');
-	if (game->map.collect > 0)
+	if (game->map.item > 0)
 	{
 		(free_textures(game), free_map_grid(game));
 		ft_mlx_err("Invalid map: Collectibles aren't reachable");
@@ -114,7 +114,7 @@ void	check_map_solvable(t_game *game, char *map_dir)
 		(free_textures(game), free_map_grid(game));
 		ft_mlx_err("Invalid map: Exit is not reachable");
 	}
-	game->map.collect = collect_count;
+	game->map.item = item_count;
 	free_map_grid(game);
 	make_map_grid(game, map_dir);
 }
