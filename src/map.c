@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/18 17:50:19 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:09:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	read_map(t_game *game, char *map_dir)
 
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		(free_graphs(game), ft_mlx_err("Invalid map: unable to open"));
+		(free_textures(game), ft_mlx_err("Invalid map: unable to open"));
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -55,7 +55,7 @@ void	read_map(t_game *game, char *map_dir)
 	}
 	close(fd);
 	if (game->map.is_valid == false)
-		(free_graphs(game), ft_mlx_err("Invalid map: not rectangular"));
+		(free_textures(game), ft_mlx_err("Invalid map: not rectangular"));
 }
 
 void	make_map_grid(t_game *game, char *map_dir)
@@ -66,10 +66,10 @@ void	make_map_grid(t_game *game, char *map_dir)
 
 	grid = malloc(game->map.height * sizeof(char *));
 	if (!grid)
-		(free_graphs(game), ft_mlx_err("Failed malloc"));
+		(free_textures(game), ft_mlx_err("Failed malloc"));
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		(free_graphs(game), free(grid), ft_mlx_err("Invalid map: unable open"));
+		(free_textures(game), free(grid), ft_mlx_err("Invalid map: cant open"));
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -78,7 +78,7 @@ void	make_map_grid(t_game *game, char *map_dir)
 		{
 			while (j-- > 0)
 				free(grid[j]);
-			free_graphs(game);
+			free_textures(game);
 			(free(grid), close(fd), ft_mlx_err("Error to get next line"));
 		}
 	}

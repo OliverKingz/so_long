@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/18 18:58:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:06:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	check_map_file(t_game *game, char *map_dir)
 	ssize_t	bytes_read;
 
 	if (ft_strlen(map_dir) <= 4 || ft_strrncmp(map_dir, ".ber", 4) != 0)
-		(free_graphs(game), ft_mlx_err("Invalid map: needs .ber extension"));
+		(free_textures(game), ft_mlx_err("Invalid map: needs .ber extension"));
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
 	{
-		free_graphs(game);
+		free_textures(game);
 		ft_mlx_err("Invalid map: unable to open or doesn't exists");
 	}
 	bytes_read = read(fd, buffer, 1);
 	if (bytes_read == 0)
 	{
-		free_graphs(game);
+		free_textures(game);
 		(close(fd), ft_mlx_err("Invalid map: file is empty"));
 	}
 	else if (bytes_read == -1)
 	{
-		free_graphs(game);
+		free_textures(game);
 		(close(fd), ft_mlx_err("Invalid map: error reading"));
 	}
 	close(fd);
@@ -77,7 +77,7 @@ void	check_map_enclosed(t_game *game)
 		if ((game->map.grid[0][i] != '1')
 			|| (game->map.grid[game->map.height - 1][i] != '1'))
 		{
-			free_game(game);
+			(free_textures(game), free_map_grid(game));
 			ft_mlx_err("Invalid map: needs enclosed in Walls (row check)");
 		}
 		i++;
@@ -88,7 +88,7 @@ void	check_map_enclosed(t_game *game)
 		if ((game->map.grid[j][0] != '1')
 			|| (game->map.grid[j][game->map.width - 1] != '1'))
 		{
-			free_game(game);
+			(free_textures(game), free_map_grid(game));
 			ft_mlx_err("Invalid map: needs enclosed in Walls (column check)");
 		}
 		j++;
@@ -106,11 +106,14 @@ void	check_map_solvable(t_game *game, char *map_dir)
 	ft_putchar('\n');
 	if (game->map.collect > 0)
 	{
-		free_game(game);
+		(free_textures(game), free_map_grid(game));
 		ft_mlx_err("Invalid map: Collectibles aren't reachable");
 	}
 	if (game->map.is_valid == false)
-		(free_game(game), ft_mlx_err("Invalid map: Exit is not reachable"));
+	{
+		(free_textures(game), free_map_grid(game));
+		ft_mlx_err("Invalid map: Exit is not reachable");
+	}
 	game->map.collect = collect_count;
 	free_map_grid(game);
 	make_map_grid(game, map_dir);
