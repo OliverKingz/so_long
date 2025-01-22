@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 23:01:00 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/22 19:45:45 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ typedef struct s_map
 typedef struct s_graph
 {
 	mlx_texture_t	*player_t[3];
+	mlx_texture_t	*item_t[2];
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
-	mlx_texture_t	*item_t[2];
 	mlx_texture_t	*exit_t;
-	mlx_image_t		*player;
+	mlx_image_t		*player[3];
+	mlx_image_t		*item[2];
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
-	mlx_image_t		*item;
-	mlx_image_t		*b_item;
 	mlx_image_t		*exit;
 	mlx_image_t		*text;
 }					t_graph;
@@ -78,6 +77,7 @@ void				init_mlx(t_game *game);
 void				init_display(t_game *game);
 void				display_img(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
+
 void				print_map(char *map_dir);
 void				print_map_grid(t_game *game);
 
@@ -92,11 +92,12 @@ bool				allow_to_move(t_game *game, int new_x, int new_y,
 void				init_map(t_game *game, char *map_dir);
 void				read_map(t_game *game, char *map_dir);
 void				make_map_grid(t_game *game, char *map_dir);
-void				check_map_file(t_game *game, char *map_dir);
 
+void				check_map_file(t_game *game, char *map_dir);
 void				check_map_elements(t_game *game);
 void				check_map_enclosed(t_game *game);
 void				check_map_solvable(t_game *game, char *map_dir);
+
 void				check_elements(t_game *game, int exit_count,
 						int player_count);
 void				flood_fill(t_game *game, int x, int y);

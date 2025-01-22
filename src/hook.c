@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 22:58:58 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/22 19:34:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	ft_loop_hook(void *param)
 	counter++;
 	if (counter % 20 == 0)
 	{
-		i = game->graphs.item->count;
+		i = game->graphs.item[0]->count;
 		while (i-- > 0)
 		{
 			state = (counter % 40 != 0);
-			game->graphs.item->enabled = state;
-			game->graphs.b_item->enabled = !state;
+			game->graphs.item[0]->enabled = state;
+			game->graphs.item[1]->enabled = !state;
 		}
 	}
 	if (counter >= 1000000)
@@ -43,18 +43,26 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
-		{
-			free_game(game);
-			mlx_close_window(game->mlx);
-		}
+			(free_game(game), mlx_close_window(game->mlx));
 		if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
 			move(game, 0, -1);
 		if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
 			move(game, 0, 1);
 		if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
+		{
+			game->graphs.player[0]->enabled = true;
 			move(game, -1, 0);
+		}
 		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
+		{
+			game->graphs.player[2]->enabled = true;
 			move(game, 1, 0);
+		}
+	}
+	if (keydata.action == MLX_RELEASE)
+	{
+		game->graphs.player[0]->enabled = false;
+		game->graphs.player[2]->enabled = false;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:12:04 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:38:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:11:24 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,27 @@ void	free_map_grid(t_game *game)
 
 void	free_textures(t_game *game)
 {
-	mlx_delete_texture(game->graphs.player_t);
+	mlx_delete_texture(game->graphs.player_t[0]);
+	mlx_delete_texture(game->graphs.player_t[1]);
+	mlx_delete_texture(game->graphs.player_t[2]);
+	mlx_delete_texture(game->graphs.item_t[0]);
+	mlx_delete_texture(game->graphs.item_t[1]);
 	mlx_delete_texture(game->graphs.floor_t);
 	mlx_delete_texture(game->graphs.wall_t);
 	mlx_delete_texture(game->graphs.exit_t);
-	mlx_delete_texture(game->graphs.item_t[0]);
-	mlx_delete_texture(game->graphs.item_t[1]);
 }
 
 void	free_images(t_game *game)
 {
-	mlx_delete_image(game->mlx, game->graphs.player);
+	mlx_delete_image(game->mlx, game->graphs.player[0]);
+	mlx_delete_image(game->mlx, game->graphs.player[1]);
+	mlx_delete_image(game->mlx, game->graphs.player[2]);
+	mlx_delete_image(game->mlx, game->graphs.item[0]);
+	mlx_delete_image(game->mlx, game->graphs.item[1]);
 	mlx_delete_image(game->mlx, game->graphs.floor);
 	mlx_delete_image(game->mlx, game->graphs.wall);
 	mlx_delete_image(game->mlx, game->graphs.exit);
 	mlx_delete_image(game->mlx, game->graphs.text);
-	mlx_delete_image(game->mlx, game->graphs.item);
-	mlx_delete_image(game->mlx, game->graphs.b_item);
 }
 
 void	free_game(t_game *game)

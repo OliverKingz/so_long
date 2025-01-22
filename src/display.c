@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:33:50 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:58:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
-	display_img(game, game->player.img, game->player.x, game->player.y);
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -26,19 +25,18 @@ void	init_display(t_game *game)
 		while (++i < game->map.width)
 		{
 			tile = game->map.grid[j][i];
-			if (tile == '0' || tile == 'P')
+			if (tile == '0' || tile == 'P' || tile == 'C')
 				display_img(game, game->graphs.floor, i, j);
-			else if (tile == '1')
+			if (tile == '1')
 				display_img(game, game->graphs.wall, i, j);
-			else if (tile == 'E')
+			if (tile == 'E')
 				display_img(game, game->graphs.exit, i, j);
 			if (tile == 'C')
-				display_img(game, game->graphs.b_item, i, j);
+				display_img(game, game->graphs.item[1], i, j);
 			if (tile == 'C')
-				display_img(game, game->graphs.item, i, j);
+				display_img(game, game->graphs.item[0], i, j);
 		}
 	}
-	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
 }
 
 void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
@@ -49,8 +47,12 @@ void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
 			game->map.t_size * y);
 	if (i_instance < 0)
 		(free_game(game), ft_mlx_err("Failed displaying image"));
-	mlx_set_instance_depth(game->player.img->instances,
+	mlx_set_instance_depth(game->graphs.player[0]->instances,
+		tile->instances[i_instance].z + 3);
+	mlx_set_instance_depth(game->graphs.player[1]->instances,
 		tile->instances[i_instance].z + 2);
+	mlx_set_instance_depth(game->graphs.player[2]->instances,
+		tile->instances[i_instance].z + 3);
 }
 
 void	display_text(t_game *game)

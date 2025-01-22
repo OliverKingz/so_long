@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:44:02 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:05:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ void	move(t_game *game, int dx, int dy)
 	{
 		game->player.x = new_x;
 		game->player.y = new_y;
-		game->player.img->instances[0].x += (dx * game->map.t_size);
-		game->player.img->instances[0].y += (dy * game->map.t_size);
+		game->graphs.player[0]->instances[0].x += (dx * game->map.t_size);
+		game->graphs.player[0]->instances[0].y += (dy * game->map.t_size);
+		game->graphs.player[1]->instances[0].x += (dx * game->map.t_size);
+		game->graphs.player[1]->instances[0].y += (dy * game->map.t_size);
+		game->graphs.player[2]->instances[0].x += (dx * game->map.t_size);
+		game->graphs.player[2]->instances[0].y += (dy * game->map.t_size);
 		game->moves++;
 		display_text(game);
 	}
