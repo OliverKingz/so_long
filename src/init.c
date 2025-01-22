@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 20:19:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:13:44 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_game	init_game(t_game *game, char *map_dir)
 	init_map(game, map_dir);
 	init_mlx(game);
 	init_images(game);
-	mlx_image_to_window(game->mlx, game->graphs.player[0], game->player.x, game->player.y);
-	mlx_image_to_window(game->mlx, game->graphs.player[1], game->player.x, game->player.y);
-	mlx_image_to_window(game->mlx, game->graphs.player[2], game->player.x, game->player.y);
+	mlx_image_to_window(game->mlx, game->graphs.player[0], game->map.t_size * game->player.x , game->map.t_size * game->player.y);
+	mlx_image_to_window(game->mlx, game->graphs.player[1], game->map.t_size * game->player.x, game->map.t_size * game->player.y);
+	mlx_image_to_window(game->mlx, game->graphs.player[2], game->map.t_size * game->player.x, game->map.t_size *game->player.y);
 	game->graphs.player[0]->enabled = false;
 	game->graphs.player[2]->enabled = false;
 	init_display(game);

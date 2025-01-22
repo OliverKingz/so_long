@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 18:05:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:40:37 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	move(t_game *game, int dx, int dy)
 	new_x = game->player.x + dx;
 	new_y = game->player.y + dy;
 	next_tile = game->map.grid[new_y][new_x];
-	if (new_x < 1 || new_x >= game->map.width - 1
-		|| new_y < 1 || new_y >= game->map.height - 1)
+	if (new_x < 0 || new_x >= game->map.width
+		|| new_y < 0 || new_y >= game->map.height)
 		return ;
 	if (!allow_to_move(game, new_x, new_y, next_tile))
 		return ;

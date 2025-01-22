@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 19:34:56 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:04:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_loop_hook(void *param)
 {
-	static int 	counter = 0;
-	t_game 		*game;
-	int 		i;
+	static int	counter = 0;
+	t_game		*game;
+	int			i;
 	bool		state;
 
 	game = (t_game *)param;
@@ -39,7 +39,7 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
-	game = param;
+	game = (t_game *)param;
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
@@ -59,7 +59,7 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 			move(game, 1, 0);
 		}
 	}
-	if (keydata.action == MLX_RELEASE)
+	if (keydata.action == MLX_RELEASE && keydata.key != MLX_KEY_ESCAPE)
 	{
 		game->graphs.player[0]->enabled = false;
 		game->graphs.player[2]->enabled = false;
