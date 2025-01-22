@@ -56,6 +56,3 @@ dkms.conf
 
 # Ignore build artifacts
 /build/
-
-# Ignore editor configurations
-.vscode/
