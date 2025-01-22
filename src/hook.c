@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:51:20 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 22:58:58 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,21 @@
 
 void	ft_loop_hook(void *param)
 {
-	t_game* 	game = (t_game*)param;
-	static int	counter = 0;
-	int			i;
+	static int 	counter = 0;
+	t_game 		*game;
+	int 		i;
+	bool		state;
 
+	game = (t_game *)param;
 	counter++;
-	if (counter % 20 == 0 && counter % 40 != 0)
+	if (counter % 20 == 0)
 	{
 		i = game->graphs.item->count;
 		while (i-- > 0)
 		{
-			game->graphs.item->enabled = false;
-			game->graphs.b_item->enabled = true;
-		}
-	}
-	if (counter % 40 == 0)
-	{
-		i = game->graphs.item->count;
-		while (i-- > 0)
-		{
-			game->graphs.item->enabled = true;
-			game->graphs.b_item->enabled = false;
+			state = (counter % 40 != 0);
+			game->graphs.item->enabled = state;
+			game->graphs.b_item->enabled = !state;
 		}
 	}
 	if (counter >= 1000000)

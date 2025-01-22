@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:53:17 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/21 23:01:00 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_map
 
 typedef struct s_graph
 {
-	mlx_texture_t	*player_t;
+	mlx_texture_t	*player_t[3];
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
 	mlx_texture_t	*item_t[2];
