@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 20:38:05 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:21:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
+	display_player(game);
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -37,6 +38,18 @@ void	init_display(t_game *game)
 				display_img(game, game->graphs.item[0], i, j);
 		}
 	}
+}
+
+void	display_player(t_game *game)
+{
+	mlx_image_to_window(game->mlx, game->graphs.player[0],
+		game->map.t_size * game->player.x , game->map.t_size * game->player.y);
+	mlx_image_to_window(game->mlx, game->graphs.player[1],
+		game->map.t_size * game->player.x, game->map.t_size * game->player.y);
+	mlx_image_to_window(game->mlx, game->graphs.player[2],
+		game->map.t_size * game->player.x, game->map.t_size *game->player.y);
+	game->graphs.player[0]->enabled = false;
+	game->graphs.player[2]->enabled = false;
 }
 
 void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
@@ -64,44 +77,4 @@ void	display_text(t_game *game)
 	mlx_delete_image(game->mlx, game->graphs.text);
 	game->graphs.text = mlx_put_string(game->mlx, moves, 6, 4);
 	free(moves);
-}
-
-void	print_map(char *map_dir)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(map_dir, O_RDONLY);
-	if (fd == -1)
-		ft_mlx_err("Invalid map: unable to open or doesn't exists");
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		else
-			ft_printf("%s", line);
-		free(line);
-	}
-	free(line);
-	close(fd);
-}
-
-void	print_map_grid(t_game *game)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < game->map.height)
-	{
-		i = 0;
-		while (i < game->map.width)
-		{
-			ft_putchar(game->map.grid[j][i]);
-			i++;
-		}
-		ft_putchar('\n');
-		j++;
-	}
 }

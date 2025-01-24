@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 19:45:45 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:18:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ void				init_player(t_game *game);
 void				init_mlx(t_game *game);
 
 void				init_display(t_game *game);
+void				display_player(t_game *game);
 void				display_img(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
-
-void				print_map(char *map_dir);
-void				print_map_grid(t_game *game);
 
 void				ft_loop_hook(void *param);
 void				ft_key_hook(mlx_key_data_t keydata, void *param);
@@ -95,11 +93,13 @@ void				make_map_grid(t_game *game, char *map_dir);
 
 void				check_map_file(t_game *game, char *map_dir);
 void				check_map_elements(t_game *game);
+void				check_elements(t_game *game, int exit_count,
+						int player_count);
 void				check_map_enclosed(t_game *game);
 void				check_map_solvable(t_game *game, char *map_dir);
 
-void				check_elements(t_game *game, int exit_count,
-						int player_count);
+void				print_map(char *map_dir);
+void				print_map_grid(t_game *game);
 void				flood_fill(t_game *game, int x, int y);
 
 void				ft_mlx_err(const char *msg);

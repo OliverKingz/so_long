@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/21 14:46:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:06:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,32 +84,4 @@ void	make_map_grid(t_game *game, char *map_dir)
 	}
 	close(fd);
 	game->map.grid = grid;
-}
-
-void	check_map_file(t_game *game, char *map_dir)
-{
-	int		fd;
-	char	buffer[1];
-	ssize_t	bytes_read;
-
-	if (ft_strlen(map_dir) <= 4 || ft_strrncmp(map_dir, ".ber", 4) != 0)
-		(free_textures(game), ft_mlx_err("Invalid map: needs .ber extension"));
-	fd = open(map_dir, O_RDONLY);
-	if (fd == -1)
-	{
-		free_textures(game);
-		ft_mlx_err("Invalid map: unable to open or doesn't exists");
-	}
-	bytes_read = read(fd, buffer, 1);
-	if (bytes_read == 0)
-	{
-		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: file is empty"));
-	}
-	else if (bytes_read == -1)
-	{
-		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: error reading"));
-	}
-	close(fd);
 }
