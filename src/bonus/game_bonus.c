@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 19:48:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:38:17 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 			game->is_running = false;
 			return (ft_printf("You win!\n"), ft_close_hook(game), true);
 		}
-		ft_printf("Items left: 0%d\n", game->map.item);
-		return (false);
+		return (ft_printf("Items left: 0%d\n", game->map.item), false);
 	}
 	else if (next_tile == 'X')
 	{

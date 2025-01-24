@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
+#    By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/24 20:04:45 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/24 23:40:02 by oliverkingz      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INC_FILES		:= so_long
 
 SRC_BONUS_FILES	:= checks_bonus hook_bonus main_bonus map_bonus utils_bonus \
 					display_bonus exit_bonus game_bonus init_bonus
-INC_BONUS_FILES		:= $(INC_BONUS_DIR)so_long_bonus
+INC_BONUS_FILES		:= bonus/so_long_bonus
 
 # GENERAL FILES
 SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -42,8 +42,8 @@ DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 INCS		:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 SRCS_BONUS	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
-OBJS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-DEPS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
+OBJS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
+DEPS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_BONUS_FILES)))
 INCS_BONUS	:= $(INC_BONUS_DIR)so_long_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 # **************************************************************************** #
@@ -126,7 +126,7 @@ re: fclean all
 
 # Rule to check if the files pass norminette
 norm:
-	@norminette $(SRCS) $(SRCS_BONUS) $(INC_FILES)
+	@norminette $(SRCS) $(SRCS_BONUS) $(INC_DIR)so_long.h $(INC_BONUS_DIR)so_long_bonus.h
 
 show:
 	@echo "Compilation command:\t"\

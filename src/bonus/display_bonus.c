@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 20:05:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:36:28 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
-	display_player(game);
 	j = -1;
 	while (++j < game->map.height)
 	{
