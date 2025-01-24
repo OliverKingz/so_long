@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+         #
+#    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 00:00:58 by oliverkingz      ###   ########.fr        #
+#    Updated: 2025/01/25 20:54:03 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
 SRC_BONUS_DIR	:= src/bonus/
 INC_BONUS_DIR	:= inc/bonus/
+OBJ_BONUS_DIR	:= obj/bonus/
 
 # **************************************************************************** #
 # FILES
@@ -42,8 +43,8 @@ DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 INCS		:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 SRCS_BONUS	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
-OBJS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
-DEPS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_BONUS_FILES)))
+OBJS_BONUS	:= $(addprefix $(OBJ_BONUS_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
+DEPS_BONUS	:= $(addprefix $(OBJ_BONUS_DIR), $(addsuffix .d, $(SRC_BONUS_FILES)))
 INCS_BONUS	:= $(INC_BONUS_DIR)so_long_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 # **************************************************************************** #
@@ -58,25 +59,12 @@ CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror
 CFLAGS			+= -Wunreachable-code -Ofast
 CFLAGS			+= -MMD -MP
-# -Wall: Enable all compiler's warning messages
-# -Wextra: Enable additional warning messages not covered by -Wall
-# -Werror: Treat all warnings as errors
-# -Wunreachable-code: Warn about code that will never be executed
-# -Ofast: Optimize code for maximum speed, disregarding strict standards compliance
-# -MMD: Generate dependency files for make, excluding system headers
-# -MP: Add phony targets for each dependency, preventing errors if files are deleted
-# -g3: Generate debugging information
-# -fsanitize=address: Enable AddressSanitizer, a memory error detector
 
 IFLAGS			:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
 IFLAGS_BONUS	:= -I$(INC_BONUS_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
 
 LDFLAGS			:= $(LIBFT)
 LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
-# -ldl: Link with the dynamic linking library
-# -lglfw: Link with the GLFW library for OpenGL
-# -pthread: Link with the POSIX threads library
-# -lm: Link with the math library
 
 # **************************************************************************** #
 # COLOURS
@@ -177,6 +165,7 @@ info:
 	@echo "\nBonus:"
 	@echo "SRC_BONUS_DIR: $(SRC_BONUS_DIR)"
 	@echo "INC_BONUS_DIR: $(INC_BONUS_DIR)"
+	@echo "OBJ_BONUS_DIR: $(OBJ_BONUS_DIR)"
 	@echo "SRC_BONUS_FILES: $(SRC_BONUS_FILES)"
 	@echo "INC_BONUS_FILES: $(INC_BONUS_FILES)"
 	@echo "SRCS_BONUS: $(SRCS_BONUS)"
@@ -193,6 +182,11 @@ valgrind: CFLAGS += -g3
 valgrind: clean all
 	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
+# Valgrind flags
+# --leak-check=full: Enables detailed memory leak checking.
+# --show-leak-kinds=all: Shows all possible leak types (definitely lost, indirectly lost, possibly lost, still reachable, suppressed).
+# --track-origins=yes: Tracks the origin of uninitialized values.
+
 # Valgrind leak types:
 # "definitely lost": memory leak, fix these.
 # "indirectly lost": memory leak in a pointer-based structure.
@@ -200,8 +194,12 @@ valgrind: clean all
 # "still reachable": program ok, memory not freed, common and often reasonable.
 # "suppressed": leak error suppressed, can be ignored.
 
+$(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
+
 bonus: $(OBJS_BONUS)
-	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
+	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)BONUS COMPILED$(DEF_COLOR)\n"
 
