@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 13:18:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:05:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,30 @@ t_game	init_game(t_game *game, char *map_dir)
 
 void	init_texture(t_game *game)
 {
-	game->graphs.player_t[0] = mlx_load_png("./assets/sprites/Player_V2_Crown_TL.png");
+	game->graphs.player_t[0] = mlx_load_png("./assets/textures/Player_TL.png");
 	if (!game->graphs.player_t[0])
-		ft_mlx_err("Failed loading texture");
-	game->graphs.player_t[1] = mlx_load_png("./assets/sprites/Player_V2_Crown_TF.png");
+		ft_mlx_err("Failed loading player texture\n");
+	game->graphs.player_t[1] = mlx_load_png("./assets/textures/Player_TF.png");
 	if (!game->graphs.player_t[1])
-		ft_mlx_err("Failed loading texture");
-	game->graphs.player_t[2] = mlx_load_png("./assets/sprites/Player_V2_Crown_TR.png");
+		ft_mlx_err("Failed loading player texture\n");
+	game->graphs.player_t[2] = mlx_load_png("./assets/textures/Player_TR.png");
 	if (!game->graphs.player_t[2])
-		ft_mlx_err("Failed loading texture");
-	game->graphs.floor_t = mlx_load_png("./assets/sprites/OZ_Tile.png");
+		ft_mlx_err("Failed loading player texture\n");
+	game->graphs.floor_t = mlx_load_png("./assets/textures/Tile.png");
 	if (!game->graphs.floor_t)
-		ft_mlx_err("Failed loading texture");
-	game->graphs.wall_t = mlx_load_png("./assets/sprites/OZ_Tree_Orange.png");
+		ft_mlx_err("Failed loading floor texture\n");
+	game->graphs.wall_t = mlx_load_png("./assets/textures/Tree.png");
 	if (!game->graphs.wall_t)
-		ft_mlx_err("Failed loading texture");
-	game->graphs.exit_t = mlx_load_png("./assets/sprites/OZ_House_V2.png");
+		ft_mlx_err("Failed loading wall texture\n");
+	game->graphs.exit_t = mlx_load_png("./assets/textures/House.png");
 	if (!game->graphs.exit_t)
-		ft_mlx_err("Failed loading texture");
-	game->graphs.item_t[0] = mlx_load_png("./assets/sprites/OZ_Food.png");
+		ft_mlx_err("Failed loading exit texture\n");
+	game->graphs.item_t[0] = mlx_load_png("./assets/textures/Food.png");
 	if (!game->graphs.item_t[0])
-		ft_mlx_err("Failed loading texture");
-	game->graphs.item_t[1] = mlx_load_png("./assets/sprites/OZ_Food_B.png");
+		ft_mlx_err("Failed loading item texture\n");
+	game->graphs.item_t[1] = mlx_load_png("./assets/textures/Food_B.png");
 	if (!game->graphs.item_t[1])
-		ft_mlx_err("Failed loading texture");
+		ft_mlx_err("Failed loading item texture");
 }
 
 void	init_images(t_game *game)
