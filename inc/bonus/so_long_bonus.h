@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 15:44:31 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:30:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "MLX42/MLX42.h"
 # include "libft.h"
@@ -50,11 +50,13 @@ typedef struct s_graph
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
 	mlx_texture_t	*exit_t;
+	mlx_texture_t	*enemy_t;
 	mlx_image_t		*player[3];
 	mlx_image_t		*item[2];
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
 	mlx_image_t		*exit;
+	mlx_image_t		*enemy;
 	mlx_image_t		*text;
 }					t_graph;
 

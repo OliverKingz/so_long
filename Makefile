@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/17 16:08:52 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/24 20:04:45 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,26 +15,36 @@
 SRC_DIR			:= src/
 INC_DIR			:= inc/
 OBJ_DIR			:= obj/
+
 LIB_DIR			:= lib/
 LIBMLX_DIR		:= $(LIB_DIR)MLX42/
 LIBMLX_INC_DIR	:= $(LIBMLX_DIR)include/
 LIBFT_DIR		:= $(LIB_DIR)libft/
 LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
+SRC_BONUS_DIR	:= src/bonus/
+INC_BONUS_DIR	:= inc/bonus/
+
 # **************************************************************************** #
 # FILES
-SRC_FILES	:= $(wildcard $(SRC_DIR)*.c)
+SRC_FILES		:= checks hook main map utils \
+					display exit game init
+INC_FILES		:= so_long
 
-# INCLUDE FILES
-INC_FILES	:= so_long
+SRC_BONUS_FILES	:= checks_bonus hook_bonus main_bonus map_bonus utils_bonus \
+					display_bonus exit_bonus game_bonus init_bonus
+INC_BONUS_FILES		:= $(INC_BONUS_DIR)so_long_bonus
 
 # GENERAL FILES
-SRCS	:= $(SRC_FILES)
-OBJS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
-DEPS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.d)))
-INCS	:= $(addprefix $(INC_DIR), $(addsuffix .h, $(INC_FILES)))
-INCS	+= $(LIBFT_INC_DIR)libft.h
-INCS	+= $(LIBMLX_INC_DIR)
+SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJS		:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
+INCS		:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
+
+SRCS_BONUS	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
+OBJS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+DEPS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
+INCS_BONUS	:= $(INC_BONUS_DIR)so_long_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 # **************************************************************************** #
 # PROJECT
@@ -44,14 +54,16 @@ LIBMLX	:= $(LIBMLX_DIR)build/libmlx42.a
 
 # **************************************************************************** #
 # COMPILER
-CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror
-CFLAGS	+= -Wunreachable-code -Ofast
-CFLAGS	+= -MMD -MP
-# CFLAGS	+= -g3 -fsanitize=address
-IFLAGS	:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
-LDFLAGS	:= $(LIBFT)
-LDFLAGS	+= $(LIBMLX) -ldl -lglfw -pthread -lm
+CC				:= cc
+CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			+= -Wunreachable-code -Ofast
+CFLAGS			+= -MMD -MP
+
+IFLAGS			:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
+IFLAGS_BONUS	:= -I$(INC_BONUS_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
+
+LDFLAGS			:= $(LIBFT)
+LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
 
 # **************************************************************************** #
 # COLOURS
@@ -114,7 +126,7 @@ re: fclean all
 
 # Rule to check if the files pass norminette
 norm:
-	@norminette $(SRCS) $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h
+	@norminette $(SRCS) $(SRCS_BONUS) $(INC_FILES)
 
 show:
 	@echo "Compilation command:\t"\
@@ -124,13 +136,16 @@ show:
 	@echo "Cleaning command:\t rm -rf $(OBJ_DIR)" $(NAME)
 
 info:
+	@echo "\nozamora's so_long:"
 	@echo "NAME: $(NAME)"
 	@echo "LIBFT: $(LIBFT)"
 	@echo "LIBMLX: $(LIBMLX)"
+	@echo "\nCompiler:"
 	@echo "CC: $(CC)"
 	@echo "CFLAGS: $(CFLAGS)"
 	@echo "IFLAGS: $(IFLAGS)"
 	@echo "LDFLAGS: $(LDFLAGS)"
+	@echo "\nDirectories:"
 	@echo "SRC_DIR: $(SRC_DIR)"
 	@echo "INC_DIR: $(INC_DIR)"
 	@echo "OBJ_DIR: $(OBJ_DIR)"
@@ -139,12 +154,23 @@ info:
 	@echo "LIBFT_INC_DIR: $(LIBFT_INC_DIR)"
 	@echo "LIBMLX_DIR: $(LIBMLX_DIR)"
 	@echo "LIBMLX_INC_DIR: $(LIBMLX_INC_DIR)"
+	@echo "\nFiles:"
 	@echo "SRC_FILES: $(SRC_FILES)"
 	@echo "INC_FILES: $(INC_FILES)"
 	@echo "SRCS: $(SRCS)"
 	@echo "OBJS: $(OBJS)"
 	@echo "DEPS: $(DEPS)"
 	@echo "INCS: $(INCS)"
+	@echo "\nBonus:"
+	@echo "SRC_BONUS_DIR: $(SRC_BONUS_DIR)"
+	@echo "INC_BONUS_DIR: $(INC_BONUS_DIR)"
+	@echo "SRC_BONUS_FILES: $(SRC_BONUS_FILES)"
+	@echo "INC_BONUS_FILES: $(INC_BONUS_FILES)"
+	@echo "SRCS_BONUS: $(SRCS_BONUS)"
+	@echo "OBJS_BONUS: $(OBJS_BONUS)"
+	@echo "DEPS_BONUS: $(DEPS_BONUS)"
+	@echo "INCS_BONUS: $(INCS_BONUS)"
+	@echo "IFLAGS_BONUS: $(IFLAGS_BONUS)"
 
 debug: CFLAGS += -g3 -fsanitize=address
 debug: clean all
@@ -155,7 +181,12 @@ valgrind: clean all
 	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
 
+bonus: $(OBJS_BONUS)
+	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
+		"$(DEF_COLOR)$(BOLD_GREEN)BONUS COMPILED$(DEF_COLOR)\n"
+
 # Phony targets
-.PHONY: all clean fclean re libmlx libft norm show info debug valgrind
+.PHONY: all clean fclean re libmlx libft norm show info debug valgrind bonus
 
 # **************************************************************************** #
