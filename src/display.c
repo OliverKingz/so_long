@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 13:21:07 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:23:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	init_display(t_game *game)
 void	display_player(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->graphs.player[0],
-		game->map.t_size * game->player.x , game->map.t_size * game->player.y);
+		game->map.t_size * game->player.x, game->map.t_size * game->player.y);
 	mlx_image_to_window(game->mlx, game->graphs.player[1],
 		game->map.t_size * game->player.x, game->map.t_size * game->player.y);
 	mlx_image_to_window(game->mlx, game->graphs.player[2],
-		game->map.t_size * game->player.x, game->map.t_size *game->player.y);
+		game->map.t_size * game->player.x, game->map.t_size * game->player.y);
 	game->graphs.player[0]->enabled = false;
 	game->graphs.player[2]->enabled = false;
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 21:04:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:30:12 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
 			move(game, 0, 1);
 		if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
-		{
 			game->graphs.player[0]->enabled = true;
+		if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
 			move(game, -1, 0);
-		}
 		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
-		{
 			game->graphs.player[2]->enabled = true;
+		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
 			move(game, 1, 0);
-		}
 	}
 	if (keydata.action == MLX_RELEASE && keydata.key != MLX_KEY_ESCAPE)
 	{

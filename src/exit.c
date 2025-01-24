@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:12:04 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/22 21:04:53 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:24:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	ft_mlx_err(const char *msg)
 {
-	//ft_putstr_fd("Error\n", 2);
-	perror("Error");
+	ft_putstr_fd("Error\n", 2);
 	if (msg)
 		ft_putstr_fd((char *)msg, 2);
 	if (mlx_errno != 0)
