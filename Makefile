@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 21:52:20 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/25 22:20:47 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,15 +82,16 @@ CLEAR_LINE	= \033[2K
 -include $(DEPS)
 
 # Default rule to create the program
-all: $(LIBMLX) $(LIBFT) $(NAME)
+all: $(NAME)
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t$(DEF_COLOR)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 # Rule to create the program
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
@@ -196,12 +197,15 @@ valgrind: clean all
 # "still reachable": program ok, memory not freed, common and often reasonable.
 # "suppressed": leak error suppressed, can be ignored.
 
+# Rule to make bonus' objects
 $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
 	@mkdir -p $(dir $@)
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t$(DEF_COLOR)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
-bonus: $(OBJS_BONUS)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
+# Rule to compile the bonus portion
+bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)BONUS COMPILED$(DEF_COLOR)\n"
 
