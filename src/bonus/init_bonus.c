@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:03:07 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:37:59 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	init_mlx(t_game *game)
 	game->mlx = mlx_init(width, height, "so_long", true);
 	if (!game->mlx)
 		ft_mlx_err("Failed init MLX42");
-	mlx_set_window_size(game->mlx, width * 2, height * 2);
+	mlx_set_window_size(game->mlx, width * 3, height * 3);
 	mlx_set_icon(game->mlx, game->graphs.player_t[1]);
-	mlx_set_window_limit(game->mlx, width, height, width * 3, height * 3);
+	mlx_set_window_limit(game->mlx, width, height, width * 6, height * 6);
 }

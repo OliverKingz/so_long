@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 21:02:23 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/25 21:52:20 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,7 @@ clean:
 fclean: 
 	@$(MAKE) clean > /dev/null
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
+	@rm -rf $(NAME)
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)FULLY CLEANED$(DEF_COLOR)\n"
 
@@ -182,6 +183,7 @@ valgrind: CFLAGS += -g3
 valgrind: clean all
 	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
+
 # Valgrind flags
 # --leak-check=full: Enables detailed memory leak checking.
 # --show-leak-kinds=all: Shows all possible leak types (definitely lost, indirectly lost, possibly lost, still reachable, suppressed).
