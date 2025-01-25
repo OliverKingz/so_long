@@ -53,6 +53,7 @@ dkms.conf
 
 # Ignore executables
 /so_long
+/so_long_bonus
 
 # Ignore build artifacts
 /build/

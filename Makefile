@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 22:20:47 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/25 23:00:15 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,10 +79,10 @@ CLEAR_LINE	= \033[2K
 
 # **************************************************************************** #
 # RULES
--include $(DEPS)
+-include $(DEPS) $(DEPS_BONUS)
 
 # Default rule to create the program
-all: $(NAME)
+all: libmlx libft $(NAME)
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -110,7 +110,7 @@ $(LIBMLX):
 
 # Rule to clean generated files
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) $(OBJ_BONUS_DIR)
 	@$(MAKE) clean -sC $(LIBFT_DIR)
 	@rm -rf $(LIBMLX_DIR)/build
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
@@ -120,7 +120,7 @@ clean:
 fclean: 
 	@$(MAKE) clean > /dev/null
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME)_bonus
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
 		"$(DEF_COLOR)$(BOLD_RED)FULLY CLEANED$(DEF_COLOR)\n"
 
@@ -197,16 +197,17 @@ valgrind: clean all
 # "still reachable": program ok, memory not freed, common and often reasonable.
 # "suppressed": leak error suppressed, can be ignored.
 
-# Rule to make bonus' objects
+# Rule to compile the bonus portion
+bonus: $(NAME)_bonus
+
 $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
 	@mkdir -p $(dir $@)
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t$(DEF_COLOR)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
-# Rule to compile the bonus portion
-bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
-	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
-	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
+$(NAME)_bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME)_bonus
+	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s bonus]:\t" \
 		"$(DEF_COLOR)$(BOLD_GREEN)BONUS COMPILED$(DEF_COLOR)\n"
 
 # Phony targets
