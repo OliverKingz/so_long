@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:30:01 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void				print_map(char *map_dir);
 void				print_map_grid(t_game *game);
 void				flood_fill(t_game *game, int x, int y);
 
-void				ft_mlx_err(const char *msg);
+void				ft_mlx_err(const char *msg, t_game *game);
 void				free_map_grid(t_game *game);
 void				free_images(t_game *game);
 void				free_textures(t_game *game);

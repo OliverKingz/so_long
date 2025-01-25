@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+         #
+#    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 00:00:58 by oliverkingz      ###   ########.fr        #
+#    Updated: 2025/01/25 15:25:36 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
 SRC_BONUS_DIR	:= src/bonus/
 INC_BONUS_DIR	:= inc/bonus/
+OBJ_BONUS_DIR	:= obj/bonus/
 
 # **************************************************************************** #
 # FILES
@@ -42,8 +43,8 @@ DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 INCS		:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 SRCS_BONUS	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
-OBJS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
-DEPS_BONUS	:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_BONUS_FILES)))
+OBJS_BONUS	:= $(addprefix $(OBJ_BONUS_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
+DEPS_BONUS	:= $(addprefix $(OBJ_BONUS_DIR), $(addsuffix .d, $(SRC_BONUS_FILES)))
 INCS_BONUS	:= $(INC_BONUS_DIR)so_long_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 # **************************************************************************** #
@@ -177,6 +178,7 @@ info:
 	@echo "\nBonus:"
 	@echo "SRC_BONUS_DIR: $(SRC_BONUS_DIR)"
 	@echo "INC_BONUS_DIR: $(INC_BONUS_DIR)"
+	@echo "OBJ_BONUS_DIR: $(OBJ_BONUS_DIR)"
 	@echo "SRC_BONUS_FILES: $(SRC_BONUS_FILES)"
 	@echo "INC_BONUS_FILES: $(INC_BONUS_FILES)"
 	@echo "SRCS_BONUS: $(SRCS_BONUS)"
@@ -199,6 +201,10 @@ valgrind: clean all
 # "possibly lost": potential memory leak, check unusual pointer usage.
 # "still reachable": program ok, memory not freed, common and often reasonable.
 # "suppressed": leak error suppressed, can be ignored.
+
+$(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
 bonus: $(OBJS_BONUS)
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 

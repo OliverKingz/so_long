@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:00:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 19:44:03 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:12:49 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_map(char *map_dir)
 
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
-		ft_mlx_err("Invalid map: unable to open or doesn't exists");
+		ft_mlx_err("Invalid map: unable to open or doesn't exists", NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -57,7 +57,7 @@ void	flood_fill(t_game *game, int x, int y)
 	if (x < 0 || x >= game->map.width
 		|| y < 0 || y >= game->map.height)
 		return ;
-	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'W'
+	if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == '*'
 		|| game->map.grid[y][x] == 'E' || game->map.grid[y][x] == 'X')
 	{
 		if (game->map.grid[y][x] == 'E')
@@ -66,7 +66,7 @@ void	flood_fill(t_game *game, int x, int y)
 	}
 	if (game->map.grid[y][x] == 'C')
 		game->map.item--;
-	game->map.grid[y][x] = 'W';
+	game->map.grid[y][x] = '*';
 	flood_fill(game, x + 1, y);
 	flood_fill(game, x - 1, y);
 	flood_fill(game, x, y + 1);

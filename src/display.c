@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 15:23:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:27:45 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
 	i_instance = mlx_image_to_window(game->mlx, tile, game->map.t_size * x,
 			game->map.t_size * y);
 	if (i_instance < 0)
-		(free_game(game), ft_mlx_err("Failed displaying image"));
+		(free_game(game), ft_mlx_err("Failed displaying image", game));
 	mlx_set_instance_depth(game->graphs.player[0]->instances,
 		tile->instances[i_instance].z + 3);
 	mlx_set_instance_depth(game->graphs.player[1]->instances,

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:12:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:12:38 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int32_t	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (ft_strlen(argv[1]) == 0)
-			ft_mlx_err("Invalid map: path is empty");
+			ft_mlx_err("Invalid map: path is empty", &game);
 		game = init_game(&game, argv[1]);
 		print_map_grid(&game);
 		if (game.is_running == true)
@@ -32,6 +32,6 @@ int32_t	main(int argc, char **argv)
 		mlx_terminate(game.mlx);
 	}
 	else
-		ft_mlx_err("Usage: ./so_long \"assets/maps/example.ber\"");
+		ft_mlx_err("Usage: ./so_long \"assets/maps/example.ber\"", &game);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:12:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:21:17 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
-			(free_game(game), mlx_close_window(game->mlx));
+			ft_close_hook(game);
 		if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
 			move(game, 0, -1);
 		if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
@@ -70,5 +70,4 @@ void	ft_close_hook(void *param)
 
 	game = param;
 	free_game(game);
-	mlx_close_window(game->mlx);
 }

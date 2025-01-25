@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:12:10 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:17:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ void	check_map_file(t_game *game, char *map_dir)
 	ssize_t	bytes_read;
 
 	if (ft_strlen(map_dir) <= 4 || ft_strrncmp(map_dir, ".ber", 4) != 0)
-		(free_textures(game), ft_mlx_err("Invalid map: needs .ber extension"));
+		(free_textures(game), ft_mlx_err("Invalid map: needs .ber", game));
 	fd = open(map_dir, O_RDONLY);
 	if (fd == -1)
 	{
 		free_textures(game);
-		ft_mlx_err("Invalid map: unable to open or doesn't exists");
+		ft_mlx_err("Invalid map: unable to open or doesn't exists", game);
 	}
 	bytes_read = read(fd, buffer, 1);
 	if (bytes_read == 0)
 	{
 		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: file is empty"));
+		(close(fd), ft_mlx_err("Invalid map: file is empty", game));
 	}
 	else if (bytes_read == -1)
 	{
 		free_textures(game);
-		(close(fd), ft_mlx_err("Invalid map: error reading"));
+		(close(fd), ft_mlx_err("Invalid map: error reading", game));
 	}
 	close(fd);
 }
@@ -72,19 +72,19 @@ void	check_elements(t_game *game, int exit_count, int player_count)
 	{
 		game->map.is_valid = false;
 		(free_textures(game), free_map_grid(game));
-		ft_mlx_err("Invalid map: needs 1+ Collectibles");
+		ft_mlx_err("Invalid map: needs 1+ Collectibles", game);
 	}
 	if (exit_count != 1)
 	{
 		game->map.is_valid = false;
 		(free_textures(game), free_map_grid(game));
-		ft_mlx_err("Invalid map: needs 1x Exit only");
+		ft_mlx_err("Invalid map: needs 1x Exit only", game);
 	}
 	if (player_count != 1)
 	{
 		game->map.is_valid = false;
 		(free_textures(game), free_map_grid(game));
-		ft_mlx_err("Invalid map: needs 1x Player only");
+		ft_mlx_err("Invalid map: needs 1x Player only", game);
 	}
 }
 
@@ -100,7 +100,7 @@ void	check_map_enclosed(t_game *game)
 			|| (game->map.grid[game->map.height - 1][i] != '1'))
 		{
 			(free_textures(game), free_map_grid(game));
-			ft_mlx_err("Invalid map: needs enclosed in Walls (row check)");
+			ft_mlx_err("Invalid map: needs enclosed in Walls(row check)", game);
 		}
 		i++;
 	}
@@ -111,7 +111,7 @@ void	check_map_enclosed(t_game *game)
 			|| (game->map.grid[j][game->map.width - 1] != '1'))
 		{
 			(free_textures(game), free_map_grid(game));
-			ft_mlx_err("Invalid map: needs enclosed in Walls (column check)");
+			ft_mlx_err("Invalid map: needs enclosed in Walls(col check)", game);
 		}
 		j++;
 	}
@@ -129,12 +129,12 @@ void	check_map_solvable(t_game *game, char *map_dir)
 	if (game->map.item > 0)
 	{
 		(free_textures(game), free_map_grid(game));
-		ft_mlx_err("Invalid map: Collectibles aren't reachable");
+		ft_mlx_err("Invalid map: Collectibles aren't reachable", game);
 	}
 	if (game->map.is_valid == false)
 	{
 		(free_textures(game), free_map_grid(game));
-		ft_mlx_err("Invalid map: Exit is not reachable");
+		ft_mlx_err("Invalid map: Exit is not reachable", game);
 	}
 	game->map.item = item_count;
 	free_map_grid(game);
