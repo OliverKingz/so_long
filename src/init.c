@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 20:51:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:03:29 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_texture(t_game *game)
 		|| !game->graphs.player_t[2] || !game->graphs.item_t[0]
 		|| !game->graphs.item_t[1] || !game->graphs.floor_t
 		|| !game->graphs.wall_t || !game->graphs.exit_t)
-		ft_mlx_err("Failed loading textures\n", game);
+		ft_mlx_err("Failed loading textures\n");
 }
 
 void	init_images(t_game *game)
@@ -62,7 +62,7 @@ void	init_images(t_game *game)
 		|| !game->graphs.player[2] || !game->graphs.item[0]
 		|| !game->graphs.item[1] || !game->graphs.floor || !game->graphs.wall
 		|| !game->graphs.exit)
-		ft_mlx_err("Failed loading textures\n", game);
+		ft_mlx_err("Failed loading textures\n");
 }
 
 void	init_player(t_game *game)
