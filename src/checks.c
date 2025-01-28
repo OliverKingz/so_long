@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:02:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:44:28 by oliverkingz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	check_map_elements(t_game *game)
 				exit_counter++;
 			else if (game->map.grid[j][i] == 'P')
 				player_counter++;
+			else if (game->map.grid[j][i] != '0' && game->map.grid[j][i] != '1'
+				&& game->map.grid[j][i] != '\n')
+				game->map.is_valid = false;
 		}
 	}
 	check_elements(game, exit_counter, player_counter);
@@ -68,6 +71,11 @@ void	check_map_elements(t_game *game)
 
 void	check_elements(t_game *game, int exit_count, int player_count)
 {
+	if (game->map.is_valid == false)
+	{
+		(free_textures(game), free_map_grid(game));
+		ft_mlx_err("Invalid map: invalid char introduced");
+	}
 	if (game->map.item == 0)
 	{
 		game->map.is_valid = false;
