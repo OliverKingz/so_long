@@ -5,9 +5,9 @@
             "name": "Depurar Makefile",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/so_long_bonus", // Ruta del ejecutable generado por el Makefile
+            "program": "${workspaceFolder}/so_long", // Ruta del ejecutable generado por el Makefile
             "args": [
-                "assets/maps/enemies.ber"
+                "assets/maps/example.ber"
             ], // Agrega argumentos aquí si tu programa los requiere
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -29,3 +29,9 @@
         }
     ]
 }
+/*
+            "program": "${workspaceFolder}/so_long_bonus", // Ruta del ejecutable generado por el Makefile
+            "args": [
+                "assets/maps/enemies.ber"
+            ], // Agrega argumentos aquí si tu programa los requiere
+*/

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 17:06:57 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:33:03 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,15 @@ void	init_display(t_game *game)
 			if (tile == 'E')
 				display_img(game, game->graphs.exit, i, j);
 			if (tile == 'C')
-				display_img(game, game->graphs.item[1], i, j);
-			if (tile == 'C')
-				display_img(game, game->graphs.item[0], i, j);
+				display_img(game, game->graphs.item, i, j);
 		}
 	}
 }
 
 void	display_player(t_game *game)
 {
-	mlx_image_to_window(game->mlx, game->graphs.play[0],
+	mlx_image_to_window(game->mlx, game->graphs.play,
 		game->map.t_size * game->play.x, game->map.t_size * game->play.y);
-	mlx_image_to_window(game->mlx, game->graphs.play[1],
-		game->map.t_size * game->play.x, game->map.t_size * game->play.y);
-	mlx_image_to_window(game->mlx, game->graphs.play[2],
-		game->map.t_size * game->play.x, game->map.t_size * game->play.y);
-	game->graphs.play[0]->enabled = false;
-	game->graphs.play[2]->enabled = false;
 }
 
 void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
@@ -59,12 +51,8 @@ void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
 			game->map.t_size * y);
 	if (i_instance < 0)
 		(free_game(game), ft_mlx_err("Failed displaying image"));
-	mlx_set_instance_depth(game->graphs.play[0]->instances,
-		tile->instances[i_instance].z + 3);
-	mlx_set_instance_depth(game->graphs.play[1]->instances,
-		tile->instances[i_instance].z + 3);
-	mlx_set_instance_depth(game->graphs.play[2]->instances,
-		tile->instances[i_instance].z + 3);
+	mlx_set_instance_depth(game->graphs.play->instances,
+		tile->instances[i_instance].z + 1);
 }
 
 void	display_text(t_game *game)
