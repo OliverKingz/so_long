@@ -12,6 +12,29 @@ This project was designed to enhance skills in **graphics programming**, **event
 - Custom map parsing and validation.  
 - Clean window management (ESC key and close button).  
 
+### Bonus Features
+- Movement Counter: A counter that displays the number of moves on the game window.
+- Item Animation: Items are animated using the loop hook.
+- Player Animation: The player sprite animates when moving, using the key hook.
+- Static Enemies: Enemies are added to the map as static obstacles.
+
+---
+
+## How to Play
+
+1. Use the **arrow keys** or **WASD** to move the player.
+2. Collect all the items (`C`) on the map to unlock the exit (`E`).
+3. Reach the exit to win the game!
+4. Avoid static enemies (`X`), as they block your path.
+
+### Controls
+
+- **W** / **Up Arrow**: Move up.
+- **A** / **Left Arrow**: Move left.
+- **S** / **Down Arrow**: Move down.
+- **D** / **Right Arrow**: Move right.
+- **ESC**: Quit the game.
+
 ---
 
 ## What I Learned  
@@ -25,9 +48,7 @@ This project was a great opportunity to deepen my understanding of:
 ---
 
 ## Installation  
-
-### Requirements  
-- **MLX42** library and its dependencies.  
+Requites **MLX42** library and its dependencies.  
 
 ### How to Run  
 1. Clone this repository:  
@@ -56,5 +77,10 @@ Thank you to the creator for making these assets available!
 
 ---
 
-## License  
-This project is licensed under the **MIT License**.  
+## Author
+
+- **Name**: Oliver King Zamora
+- **GitHub**: [oliverkingz](https://github.com/oliverkingz)
+- **42 Login**: ozamora-
+
+--- 
