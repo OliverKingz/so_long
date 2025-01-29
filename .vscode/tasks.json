@@ -12,7 +12,7 @@
                 "-g", // Necessary for debugging
                 "${workspaceFolder}/src/*.c", // Compile all C files in the src directory
                 "-o",
-                "${workspaceFolder}/so_long", // Output executable
+                "${workspaceFolder}/so_long_bonus", // Output executable
                 "-lmlx", // Link with the MLX library
                 "-lXext", // Link with the Xext library
                 "-lX11", // Link with the X11 library
