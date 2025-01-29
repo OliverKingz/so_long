@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:19:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:47:33 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,6 @@ void	check_map_solvable(t_game *game, char *map_dir)
 	item_count = game->map.item;
 	game->map.is_valid = false;
 	flood_fill(game, game->play.x, game->play.y);
-	print_map_grid(game);
-	ft_putchar('\n');
 	if (game->map.item > 0)
 	{
 		(free_textures(game), free_map_grid(game));

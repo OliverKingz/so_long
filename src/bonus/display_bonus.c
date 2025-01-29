@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:19:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:38:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	display_text(t_game *game)
 	char	*moves;
 
 	moves = ft_itoa(game->moves);
-	ft_printf("Moves made: %d\n", game->moves);
 	mlx_delete_image(game->mlx, game->graphs.text);
 	game->graphs.text = mlx_put_string(game->mlx, moves, 6, 4);
 	free(moves);

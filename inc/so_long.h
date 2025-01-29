@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:19:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:53:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_graph
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
 	mlx_image_t		*exit;
-	mlx_image_t		*text;
 }					t_graph;
 
 typedef struct s_game

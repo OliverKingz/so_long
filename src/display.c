@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:19:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:06:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
-	display_player(game);
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -63,18 +62,12 @@ void	display_img(t_game *game, mlx_image_t *tile, int x, int y)
 	mlx_set_instance_depth(game->graphs.play[0]->instances,
 		tile->instances[i_instance].z + 3);
 	mlx_set_instance_depth(game->graphs.play[1]->instances,
-		tile->instances[i_instance].z + 2);
+		tile->instances[i_instance].z + 3);
 	mlx_set_instance_depth(game->graphs.play[2]->instances,
 		tile->instances[i_instance].z + 3);
 }
 
 void	display_text(t_game *game)
 {
-	char	*moves;
-
-	moves = ft_itoa(game->moves);
 	ft_printf("Moves made: %d\n", game->moves);
-	mlx_delete_image(game->mlx, game->graphs.text);
-	game->graphs.text = mlx_put_string(game->mlx, moves, 6, 4);
-	free(moves);
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:20:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:04:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_game	init_game(t_game *game, char *map_dir)
 	init_map(game, map_dir);
 	init_mlx(game);
 	init_images(game);
+	display_player(game);
 	init_display(game);
-	game->graphs.text = mlx_put_string(game->mlx, "0", 6, 4);
 	game->moves = 0;
 	game->is_running = true;
 	return (*game);
