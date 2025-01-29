@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:40:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 14:39:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:53:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_loop_hook(void *param)
 			state = (counter % 40 != 0);
 			game->graphs.item[0]->enabled = state;
 			game->graphs.item[1]->enabled = !state;
+			game->graphs.enemy[0]->enabled = state;
+			game->graphs.enemy[1]->enabled = !state;
 		}
 	}
 	if (counter >= 1000000)

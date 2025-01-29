@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:02:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:50:37 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_display(t_game *game)
 	int		i;
 	char	tile;
 
-	display_player(game);
+	display_player_exit(game);
 	j = -1;
 	while (++j < game->map.height)
 	{
@@ -40,7 +40,7 @@ void	init_display(t_game *game)
 	}
 }
 
-void	display_player(t_game *game)
+void	display_player_exit(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->graphs.player[0],
 		game->map.t_size * game->player.x, game->map.t_size * game->player.y);

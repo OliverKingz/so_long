@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:02:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:55:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_map(t_game *game, char *map_dir)
 	check_map_file(game, map_dir);
 	read_map(game, map_dir);
 	make_map_grid(game, map_dir);
-	init_player(game);
+	init_player_exit(game);
 	check_map_enclosed(game);
 	check_map_elements(game);
 	check_map_solvable(game, map_dir);

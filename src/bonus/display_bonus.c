@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:28:43 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 15:28:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:51:46 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	init_display(t_game *game)
 			if (tile == 'C')
 				display_img(game, game->graphs.item[0], i, j);
 			if (tile == 'X')
-				display_img(game, game->graphs.enemy, i, j);
+				display_img(game, game->graphs.enemy[0], i, j);
+			if (tile == 'X')
+				display_img(game, game->graphs.enemy[1], i, j);
 		}
 	}
 }
 
-void	display_player(t_game *game)
+void	display_player_exit(t_game *game)
 {
 	mlx_image_to_window(game->mlx, game->graphs.player[0],
 		game->map.t_size * game->player.x, game->map.t_size * game->player.y);
