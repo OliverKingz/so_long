@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:19:15 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ typedef struct s_map
 
 typedef struct s_graph
 {
-	mlx_texture_t	*player_t[3];
+	mlx_texture_t	*play_t[3];
 	mlx_texture_t	*item_t[2];
+	mlx_texture_t	*exit_t[2];
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
-	mlx_texture_t	*exit_t;
-	mlx_texture_t	*enemy_t;
-	mlx_image_t		*player[3];
+	mlx_texture_t	*enemy_t[2];
+	mlx_image_t		*play[3];
 	mlx_image_t		*item[2];
+	mlx_image_t		*exit[2];
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
-	mlx_image_t		*exit;
-	mlx_image_t		*enemy;
+	mlx_image_t		*enemy[2];
 	mlx_image_t		*text;
 }					t_graph;
 
@@ -64,7 +64,8 @@ typedef struct s_game
 {
 	t_map			map;
 	t_graph			graphs;
-	t_entity		player;
+	t_entity		play;
+	t_entity		exit;
 	mlx_t			*mlx;
 	int				moves;
 	bool			is_running;
@@ -73,11 +74,11 @@ typedef struct s_game
 t_game				init_game(t_game *game, char *map_dir);
 void				init_texture(t_game *game);
 void				init_images(t_game *game);
-void				init_player(t_game *game);
+void				init_player_exit(t_game *game);
 void				init_mlx(t_game *game);
 
 void				init_display(t_game *game);
-void				display_player(t_game *game);
+void				display_player_exit(t_game *game);
 void				display_img(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
 
