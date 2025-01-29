@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:02:35 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:34:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 	{
 		if (game->map.item == 0)
 		{
+			mlx_close_window(game->mlx);
 			ft_printf("You win!\n");
 			game->is_running = false;
 			free_game(game);
-			mlx_close_window(game->mlx);
-			return (true);
+			return (false);
 		}
 		ft_printf("Items left: 0%d\n", game->map.item);
 		return (false);
