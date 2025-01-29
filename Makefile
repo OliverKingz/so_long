@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/25 23:00:15 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/29 18:04:13 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,76 +127,6 @@ fclean:
 # Rule to recompile from zero. 
 re: fclean all
 
-# Rule to check if the files pass norminette
-norm:
-	@norminette $(SRCS) $(SRCS_BONUS) $(INC_DIR)so_long.h $(INC_BONUS_DIR)so_long_bonus.h
-
-show:
-	@echo "Compilation command:\t"\
-		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)so_long.c -o $(OBJ_DIR)so_long.o"
-	@echo "Linking command:\t"\
-		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
-	@echo "Cleaning command:\t rm -rf $(OBJ_DIR)" $(NAME)
-
-info:
-	@echo "\nozamora's so_long:"
-	@echo "NAME: $(NAME)"
-	@echo "LIBFT: $(LIBFT)"
-	@echo "LIBMLX: $(LIBMLX)"
-	@echo "\nCompiler:"
-	@echo "CC: $(CC)"
-	@echo "CFLAGS: $(CFLAGS)"
-	@echo "IFLAGS: $(IFLAGS)"
-	@echo "LDFLAGS: $(LDFLAGS)"
-	@echo "\nDirectories:"
-	@echo "SRC_DIR: $(SRC_DIR)"
-	@echo "INC_DIR: $(INC_DIR)"
-	@echo "OBJ_DIR: $(OBJ_DIR)"
-	@echo "LIB_DIR: $(LIB_DIR)"
-	@echo "LIBFT_DIR: $(LIBFT_DIR)"
-	@echo "LIBFT_INC_DIR: $(LIBFT_INC_DIR)"
-	@echo "LIBMLX_DIR: $(LIBMLX_DIR)"
-	@echo "LIBMLX_INC_DIR: $(LIBMLX_INC_DIR)"
-	@echo "\nFiles:"
-	@echo "SRC_FILES: $(SRC_FILES)"
-	@echo "INC_FILES: $(INC_FILES)"
-	@echo "SRCS: $(SRCS)"
-	@echo "OBJS: $(OBJS)"
-	@echo "DEPS: $(DEPS)"
-	@echo "INCS: $(INCS)"
-	@echo "\nBonus:"
-	@echo "SRC_BONUS_DIR: $(SRC_BONUS_DIR)"
-	@echo "INC_BONUS_DIR: $(INC_BONUS_DIR)"
-	@echo "OBJ_BONUS_DIR: $(OBJ_BONUS_DIR)"
-	@echo "SRC_BONUS_FILES: $(SRC_BONUS_FILES)"
-	@echo "INC_BONUS_FILES: $(INC_BONUS_FILES)"
-	@echo "SRCS_BONUS: $(SRCS_BONUS)"
-	@echo "OBJS_BONUS: $(OBJS_BONUS)"
-	@echo "DEPS_BONUS: $(DEPS_BONUS)"
-	@echo "INCS_BONUS: $(INCS_BONUS)"
-	@echo "IFLAGS_BONUS: $(IFLAGS_BONUS)"
-
-debug: CFLAGS += -g3 -fsanitize=address
-debug: clean all
-	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE]$(DEF_COLOR)"
-
-valgrind: CFLAGS += -g3
-valgrind: clean all
-	@echo "\t\t\t$(BOLD_YELLOW)[DEBUG MODE WITH VALGRIND]$(DEF_COLOR)"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "assets/maps/example.ber"
-
-# Valgrind flags
-# --leak-check=full: Enables detailed memory leak checking.
-# --show-leak-kinds=all: Shows all possible leak types (definitely lost, indirectly lost, possibly lost, still reachable, suppressed).
-# --track-origins=yes: Tracks the origin of uninitialized values.
-
-# Valgrind leak types:
-# "definitely lost": memory leak, fix these.
-# "indirectly lost": memory leak in a pointer-based structure.
-# "possibly lost": potential memory leak, check unusual pointer usage.
-# "still reachable": program ok, memory not freed, common and often reasonable.
-# "suppressed": leak error suppressed, can be ignored.
-
 # Rule to compile the bonus portion
 bonus: $(NAME)_bonus
 
@@ -211,6 +141,6 @@ $(NAME)_bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
 		"$(DEF_COLOR)$(BOLD_GREEN)BONUS COMPILED$(DEF_COLOR)\n"
 
 # Phony targets
-.PHONY: all clean fclean re libmlx libft norm show info debug valgrind bonus
+.PHONY: all clean fclean re libmlx libft bonus
 
 # **************************************************************************** #
