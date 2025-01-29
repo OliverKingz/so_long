@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 15:55:06 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:44:08 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init_map(t_game *game, char *map_dir)
 	game->map.is_valid = true;
 	check_map_file(game, map_dir);
 	read_map(game, map_dir);
+	if (game->map.width > 100 || game->map.height > 50)
+		(free_textures(game), ft_mlx_err("Invalid map: too big, max 100x50"));
 	make_map_grid(game, map_dir);
 	init_player_exit(game);
 	check_map_enclosed(game);
