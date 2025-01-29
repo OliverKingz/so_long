@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:50:47 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ typedef struct s_graph
 {
 	mlx_texture_t	*player_t[3];
 	mlx_texture_t	*item_t[2];
+	mlx_texture_t	*exit_t[2];
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
-	mlx_texture_t	*exit_t;
 	mlx_texture_t	*enemy_t;
 	mlx_image_t		*player[3];
 	mlx_image_t		*item[2];
+	mlx_image_t		*exit[2];
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
-	mlx_image_t		*exit;
 	mlx_image_t		*enemy;
 	mlx_image_t		*text;
 }					t_graph;
@@ -65,6 +65,7 @@ typedef struct s_game
 	t_map			map;
 	t_graph			graphs;
 	t_entity		player;
+	t_entity		exit;
 	mlx_t			*mlx;
 	int				moves;
 	bool			is_running;

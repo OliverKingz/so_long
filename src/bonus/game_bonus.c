@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:55:35 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:02:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:24:23 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,25 @@ bool	allow_to_move(t_game *game, int new_x, int new_y, char next_tile)
 	else if (next_tile == 'C')
 	{
 		game->map.item--;
-		ft_printf("Items left: 0%d\n", game->map.item);
+		if (game->map.item == 0)
+				game->graphs.exit[1]->enabled = true;
 		game->map.grid[new_y][new_x] = '0';
 		display_img(game, game->graphs.floor, new_x, new_y);
-		return (true);
+		return (ft_printf("Items left: 0%d\n", game->map.item), true);
 	}
 	else if (next_tile == 'E')
 	{
 		if (game->map.item == 0)
 		{
 			game->is_running = false;
-			return (ft_printf("You win!\n"), ft_close_hook(game), true);
+			return (ft_printf("You win!\n"), ft_close_hook(game), false);
 		}
 		return (ft_printf("Items left: 0%d\n", game->map.item), false);
 	}
 	else if (next_tile == 'X')
 	{
 		game->is_running = false;
-		return (ft_printf("You lost!\n"), ft_close_hook(game), true);
+		return (ft_printf("You lost!\n"), ft_close_hook(game), false);
 	}
 	return (true);
 }
