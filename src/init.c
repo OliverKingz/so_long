@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:49:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/25 21:54:18 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:20:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ t_game	init_game(t_game *game, char *map_dir)
 
 void	init_texture(t_game *game)
 {
-	game->graphs.player_t[0] = mlx_load_png("./assets/textures/Player_TL.png");
-	game->graphs.player_t[1] = mlx_load_png("./assets/textures/Player_TF.png");
-	game->graphs.player_t[2] = mlx_load_png("./assets/textures/Player_TR.png");
+	game->graphs.play_t[0] = mlx_load_png("./assets/textures/Player_TL.png");
+	game->graphs.play_t[1] = mlx_load_png("./assets/textures/Player_TF.png");
+	game->graphs.play_t[2] = mlx_load_png("./assets/textures/Player_TR.png");
 	game->graphs.item_t[0] = mlx_load_png("./assets/textures/Food.png");
 	game->graphs.item_t[1] = mlx_load_png("./assets/textures/Food_B.png");
 	game->graphs.floor_t = mlx_load_png("./assets/textures/Tile.png");
 	game->graphs.wall_t = mlx_load_png("./assets/textures/Tree.png");
 	game->graphs.exit_t = mlx_load_png("./assets/textures/House.png");
-	if (!game->graphs.player_t[0] || !game->graphs.player_t[1]
-		|| !game->graphs.player_t[2] || !game->graphs.item_t[0]
+	if (!game->graphs.play_t[0] || !game->graphs.play_t[1]
+		|| !game->graphs.play_t[2] || !game->graphs.item_t[0]
 		|| !game->graphs.item_t[1] || !game->graphs.floor_t
 		|| !game->graphs.wall_t || !game->graphs.exit_t)
 		ft_mlx_err("Failed loading textures\n");
@@ -44,22 +44,22 @@ void	init_texture(t_game *game)
 
 void	init_images(t_game *game)
 {
-	game->graphs.player[0] = mlx_texture_to_image(game->mlx,
-			game->graphs.player_t[0]);
-	game->graphs.player[1] = mlx_texture_to_image(game->mlx,
-			game->graphs.player_t[1]);
-	game->graphs.player[2] = mlx_texture_to_image(game->mlx,
-			game->graphs.player_t[2]);
+	game->graphs.play[0] = mlx_texture_to_image(game->mlx,
+			game->graphs.play_t[0]);
+	game->graphs.play[1] = mlx_texture_to_image(game->mlx,
+			game->graphs.play_t[1]);
+	game->graphs.play[2] = mlx_texture_to_image(game->mlx,
+			game->graphs.play_t[2]);
 	game->graphs.item[0] = mlx_texture_to_image(game->mlx,
 			game->graphs.item_t[0]);
 	game->graphs.item[1] = mlx_texture_to_image(game->mlx,
 			game->graphs.item_t[1]);
-	game->player.img = game->graphs.player[1];
+	game->play.img = game->graphs.play[1];
 	game->graphs.floor = mlx_texture_to_image(game->mlx, game->graphs.floor_t);
 	game->graphs.wall = mlx_texture_to_image(game->mlx, game->graphs.wall_t);
 	game->graphs.exit = mlx_texture_to_image(game->mlx, game->graphs.exit_t);
-	if (!game->graphs.player[0] || !game->graphs.player[1]
-		|| !game->graphs.player[2] || !game->graphs.item[0]
+	if (!game->graphs.play[0] || !game->graphs.play[1]
+		|| !game->graphs.play[2] || !game->graphs.item[0]
 		|| !game->graphs.item[1] || !game->graphs.floor || !game->graphs.wall
 		|| !game->graphs.exit)
 		ft_mlx_err("Failed loading textures\n");
@@ -78,9 +78,9 @@ void	init_player(t_game *game)
 		{
 			if (game->map.grid[i][j] == 'P')
 			{
-				game->player.x = j;
-				game->player.y = i;
-				game->player.img = game->graphs.player[1];
+				game->play.x = j;
+				game->play.y = i;
+				game->play.img = game->graphs.play[1];
 			}
 			j++;
 		}
@@ -100,6 +100,6 @@ void	init_mlx(t_game *game)
 	if (!game->mlx)
 		ft_mlx_err("Failed init MLX42");
 	mlx_set_window_size(game->mlx, width * 3, height * 3);
-	mlx_set_icon(game->mlx, game->graphs.player_t[1]);
+	mlx_set_icon(game->mlx, game->graphs.play_t[1]);
 	mlx_set_window_limit(game->mlx, width, height, width * 6, height * 6);
 }
