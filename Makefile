@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/01/30 15:47:36 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/01/30 15:50:43 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 $(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
 	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
-		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\"
+		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)"
 	@echo "                                   $(BOLD_YELLOW)";
 	@echo " ▗▄▄▖ ▗▄▖   ▗▖    ▗▄▖ ▗▖  ▗▖ ▗▄▄▖";
 	@echo "▐▌   ▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ";
