@@ -86,4 +86,9 @@ Thank you to the creator for making these assets available!
 - **GitHub**: [oliverkingz](https://github.com/oliverkingz)
 - **42 Login**: ozamora-
 
+---
+
+## Acknowledgments  
+This project is part of the **42 Cursus**, a rigorous programming curriculum that emphasizes hands-on learning and problem-solving. Special thanks to the 42 team for providing this challenging and rewarding project!  
+
 --- 
