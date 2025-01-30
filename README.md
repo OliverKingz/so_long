@@ -2,6 +2,8 @@
 [42 Cursus] A simple 2D game built with **MLX42** where the player must collect all items and reach the exit while navigating a custom map.  
 This project was designed to enhance skills in **graphics programming**, **event handling**, and **C programming**.
 
+![Ejemplo del juego](assets/images/so_long.png)
+
 ---
 
 ## Features  
@@ -14,9 +16,10 @@ This project was designed to enhance skills in **graphics programming**, **event
 
 ### Bonus Features
 - Movement Counter: A counter that displays the number of moves on the game window.
-- Item Animation: Items are animated using the loop hook.
+- Item Animation: Items are animated, using the loop hook.
 - Player Animation: The player sprite animates when moving, using the key hook.
-- Static Enemies: Enemies are added to the map as static obstacles.
+- Enemies + Animation: Animated Enemies are added to the map, using loop hook. 
+- Exit Animation: when all collectibles are collected, the exit opens. 
 
 ---
 
