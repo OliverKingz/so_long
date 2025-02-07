@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/02/07 13:33:00 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/02/07 13:35:48 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,23 +100,17 @@ all: libmlx libft $(NAME)
 $(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
 	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(BG)Compilation success\t✅$(NC)\n"
+	@echo " ▗▄▄▖ ▗▄▖   ▗▖    ▗▄▖ ▗▖  ▗▖ ▗▄▄▖";
+	@echo "▐▌   ▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ";
+	@echo " ▝▀▚▖▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▌ ▝▜▌▐▌▝▜▌";
+	@echo "▗▄▄▞▘▝▚▄▞▘  ▐▙▄▄▖▝▚▄▞▘▐▌  ▐▌▝▚▄▞▘ by ozamora-";
+	@echo "                                   ";
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
 	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-
-# Rule to create the program
-$(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
-	@printf "%b" "$(CLEAR_LINE)$(BOLD_BLUE)[ozamora-'s so_long]:\t" \
-		"$(DEF_COLOR)$(BOLD_GREEN)COMPILED$(DEF_COLOR)\n"
-	@echo " ▗▄▄▖ ▗▄▖   ▗▖    ▗▄▖ ▗▖  ▗▖ ▗▄▄▖";
-	@echo "▐▌   ▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ";
-	@echo " ▝▀▚▖▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▌ ▝▜▌▐▌▝▜▌";
-	@echo "▗▄▄▞▘▝▚▄▞▘  ▐▙▄▄▖▝▚▄▞▘▐▌  ▐▌▝▚▄▞▘ by ozamora-";
-	@echo "                                   $(DEF_COLOR)";
 
 # Rule to make the library Libft
 libft: $(LIBFT)
