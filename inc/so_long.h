@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:41:00 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/24 15:44:31 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:31:51 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,23 @@ typedef struct s_map
 
 typedef struct s_graph
 {
-	mlx_texture_t	*player_t[3];
-	mlx_texture_t	*item_t[2];
+	mlx_texture_t	*play_t;
+	mlx_texture_t	*item_t;
 	mlx_texture_t	*floor_t;
 	mlx_texture_t	*wall_t;
 	mlx_texture_t	*exit_t;
-	mlx_image_t		*player[3];
-	mlx_image_t		*item[2];
+	mlx_image_t		*play;
+	mlx_image_t		*item;
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
 	mlx_image_t		*exit;
-	mlx_image_t		*text;
 }					t_graph;
 
 typedef struct s_game
 {
 	t_map			map;
 	t_graph			graphs;
-	t_entity		player;
+	t_entity		play;
 	mlx_t			*mlx;
 	int				moves;
 	bool			is_running;
@@ -79,7 +78,6 @@ void				display_player(t_game *game);
 void				display_img(t_game *game, mlx_image_t *tile, int x, int y);
 void				display_text(t_game *game);
 
-void				ft_loop_hook(void *param);
 void				ft_key_hook(mlx_key_data_t keydata, void *param);
 void				ft_close_hook(void *param);
 

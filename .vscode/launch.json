@@ -29,3 +29,9 @@
         }
     ]
 }
+/*
+            "program": "${workspaceFolder}/so_long_bonus", // Ruta del ejecutable generado por el Makefile
+            "args": [
+                "assets/maps/enemies.ber"
+            ], // Agrega argumentos aquí si tu programa los requiere
+*/
