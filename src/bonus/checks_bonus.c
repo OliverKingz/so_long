@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oliverkingz <oliverkingz@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:57:02 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/28 23:45:39 by oliverkingz      ###   ########.fr       */
+/*   Updated: 2025/01/29 01:46:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
