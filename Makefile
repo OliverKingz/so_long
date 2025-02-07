@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/02/07 13:35:48 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/02/07 22:10:48 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,18 +80,19 @@ ifeq ($(VALGRIND),1)
 endif
 
 # **************************************************************************** #
-# COLOURS
-
+# COLOURS: BOLD RGBYW
 BR	= \033[1;31m
 BG	= \033[1;32m
 BB	= \033[1;34m
 BY	= \033[1;33m
+BW	= \033[1;37m
 
+# NO COLOR and CLEAR LINE
 NC	= \033[0;39m
 CL	= \033[2K
 
 # **************************************************************************** #
-# RULES
+# ESSENTIAL RULES
 
 # Default rule to create the program
 all: libmlx libft $(NAME)
@@ -99,17 +100,18 @@ all: libmlx libft $(NAME)
 # Rule to create the program
 $(NAME): $(OBJS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME) 
-	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(BG)Compilation success\t✅$(NC)\n"
-	@echo " ▗▄▄▖ ▗▄▖   ▗▖    ▗▄▖ ▗▖  ▗▖ ▗▄▄▖";
-	@echo "▐▌   ▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ";
-	@echo " ▝▀▚▖▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▌ ▝▜▌▐▌▝▜▌";
-	@echo "▗▄▄▞▘▝▚▄▞▘  ▐▙▄▄▖▝▚▄▞▘▐▌  ▐▌▝▚▄▞▘ by ozamora-";
-	@echo "                                   ";
+	@printf "%b" "$(CL) -> $(BW)[so_long]:\t\t$(BG)Compilation success\t✅$(NC)\n"
+	@echo "─────────────────────────────────────────────────────$(BY)"
+	@echo "      ▗▄▄▖ ▗▄▖   ▗▖    ▗▄▖ ▗▖  ▗▖ ▗▄▄▖";
+	@echo "     ▐▌   ▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌   ";
+	@echo "      ▝▀▚▖▐▌ ▐▌  ▐▌   ▐▌ ▐▌▐▌ ▝▜▌▐▌▝▜▌";
+	@echo "     ▗▄▄▞▘▝▚▄▞▘  ▐▙▄▄▖▝▚▄▞▘▐▌  ▐▌▝▚▄▞▘ by ozamora-$(NC)";
+	@echo "\n─────────────────────────────────────────────────────"
 
 # Rule to compile object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(NC)$<\r"
+	@printf "%b" "$(CL) -> $(BW)[so_long]:\t\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 # Rule to make the library Libft
@@ -121,14 +123,14 @@ $(LIBFT):
 libmlx: $(LIBMLX)
 $(LIBMLX):
 	-@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
-	@printf "%b" "$(CL) -> $(BB)[LibMLX]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[LibMLX]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 
 # Rule to clean generated files
 clean:
 	@rm -rf $(OBJ_DIR) $(OBJ_BONUS_DIR)
 	@$(MAKE) clean -sC $(LIBFT_DIR)
 	@rm -rf $(LIBMLX_DIR)/build
-	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(BG)Object files cleaned\t❎$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[so_long]:\t\t$(BG)Object files cleaned\t❎$(NC)\n"
 	@rm -f $(BUILD_MODE_FILE)
 
 # Rule to clean generated files and the executablle
@@ -136,24 +138,25 @@ fclean:
 	@$(MAKE) clean > /dev/null
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
 	@rm -rf $(NAME) $(NAME)_bonus
-	@printf "%b" "$(CL) -> $(BB)[so_long]:\t\t$(BG)Executable cleaned\t❎$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[so_long]:\t\t$(BG)Exe and objects cleaned\t❎$(NC)\n"
 
 # Rule to recompile from zero. 
 re: fclean all
 
 # **************************************************************************** #
 # BONUS RULES
+
 # Rule to compile the bonus portion
 bonus: $(NAME)_bonus
 
 $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
 	@mkdir -p $(dir $@)
-	@printf "%b" "$(CL)$(BB)[so_long]:\t\t$(NC)$<\r"
+	@printf "%b" "$(CL)$(BW)[so_long]:\t\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
 $(NAME)_bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME)_bonus
-	@printf "%b" "$(CL)$(BB)[bonus]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
+	@printf "%b" "$(CL)$(BW)[bonus]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 
 # **************************************************************************** #
 # NORM AND DEBUG RULES
@@ -171,15 +174,6 @@ debug:
 	@echo " -> $(BB)[Debug]:\t\t$(BG)Debug mode enabled\t🟦$(NC)"
 	-@if [ ! -z "$(ARGS)" ]; then ./$(NAME) $(ARGS); fi
 
-valgrind:
-	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "VALGRIND=1" $(BUILD_MODE_FILE); then \
-		$(MAKE) clean -s; \
-	fi
-	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
-	@$(MAKE) -s VALGRIND=1
-	@echo " -> $(BB)[Valgrind]:\t\t$(BG)Valgrind mode enabled\t🟦$(NC)"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(ARGS)
-
 # Valgrind flags
 # --leak-check=full: Enables detailed memory leak checking.
 # --show-leak-kinds=all: Shows all possible leak types (definitely lost, indirectly lost, possibly lost, still reachable, suppressed).
@@ -192,8 +186,20 @@ valgrind:
 # "still reachable": program ok, memory not freed, common and often reasonable.
 # "suppressed": leak error suppressed, can be ignored.
 
+# Rule to compile with valgrind debug flags
+valgrind:
+	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "VALGRIND=1" $(BUILD_MODE_FILE); then \
+		$(MAKE) clean -s; \
+	fi
+	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
+	@$(MAKE) -s VALGRIND=1
+	@echo " -> $(BB)[Valgrind]:\t\t$(BG)Valgrind mode enabled\t🟦$(NC)"
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(ARGS)
+
 # **************************************************************************** #
 # ADDITIONAL RULES
+
+# Rule to show compilation and linking commands
 show:
 	@echo "Compilation command:\t"\
 		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)so_long.c -o $(OBJ_DIR)so_long.o"
@@ -201,6 +207,7 @@ show:
 		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
 	@echo "Cleaning command:\t rm -rf $(OBJ_DIR)" $(NAME)
 
+# Rule to show all variables being used
 info:
 	@echo "\nozamora's so_long:"
 	@echo "NAME: $(NAME)"
@@ -240,7 +247,7 @@ info:
 	@echo "IFLAGS_BONUS: $(IFLAGS_BONUS)"
 
 -include $(DEPS) $(DEPS_BONUS)
-.PHONY: all clean fclean re libmlx libft norm show info debug valgrind bonus
+.PHONY: all clean fclean re libmlx libft bonus norm debug valgrind show info
 .DEFAULT_GOAL := all
 
 # **************************************************************************** #
