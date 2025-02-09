@@ -4,6 +4,23 @@ This project was designed to enhance skills in **graphics programming**, **event
 
 ![Ejemplo del juego](assets/images/so_long.png)
 
+Keywords  
+- **2D Game Development**  
+- **Graphics Programming**  
+- **MLX42**  
+- **Tiles and Sprites**  
+- **Map Parsing**  
+- **Event Handling**  
+- **Memory Management**  
+- **Game Logic**  
+- **Animation**  
+- **C Programming**  
+
+---
+
+## Overview  
+**so_long** is a small 2D game developed using the **MLX42** library. It introduces players to the basics of game development, including map navigation, item collection, and obstacle avoidance. The project emphasizes practical learning, offering hands-on experience with **graphics rendering**, **event handling**, and **resource management**. It’s a fun and accessible way to explore game mechanics and programming concepts.  
+
 ---
 
 ## Features  
@@ -43,10 +60,13 @@ This project was designed to enhance skills in **graphics programming**, **event
 ## What I Learned  
 This project was a great opportunity to deepen my understanding of:  
 - **Graphics Programming**: Working with **MLX42** to render textures, handle window events, and manage animations.  
+- **Game Logic**: Developed a solid understanding of game mechanics, including player movement, item collection, and win/lose conditions.  
 - **Memory Management**: Ensuring proper allocation and deallocation of resources to avoid leaks.  
 - **Map Parsing and Validation**: Implementing robust logic to validate map files and ensure they meet game requirements.  
 - **Event Handling**: Managing keyboard inputs and window events for smooth gameplay.  
-- **Problem Solving**: Debugging and optimizing code to handle edge cases and improve performance.  
+- **Resource Management**: Efficiently managing and animating game assets like sprites and tiles.  
+- **Coordinate Management**: Handling 2D coordinates and implementing game logic based on grid-based systems.  
+- **Creative Problem Solving**: Tackling challenges such as map validation, animation loops, and enemy behavior, which enhanced my ability to think critically and creatively.  
 
 ---
 
