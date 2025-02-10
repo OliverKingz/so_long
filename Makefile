@@ -6,7 +6,7 @@
 #    By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 20:01:56 by ozamora-          #+#    #+#              #
-#    Updated: 2025/02/07 22:10:48 by ozamora-         ###   ########.fr        #
+#    Updated: 2025/02/10 18:02:12 by ozamora-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,12 +151,12 @@ bonus: $(NAME)_bonus
 
 $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
 	@mkdir -p $(dir $@)
-	@printf "%b" "$(CL)$(BW)[so_long]:\t\t$(NC)$<\r"
+	@printf "%b" "$(CL) -> $(BW)[so_long]:\t\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
 $(NAME)_bonus: $(OBJS_BONUS) $(LIBMLX) $(LIBFT)
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME)_bonus
-	@printf "%b" "$(CL)$(BW)[bonus]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[bonus]:\t\t$(NC)$(BG)Compiled: so_long_bonus\t✅$(NC)\n"
 
 # **************************************************************************** #
 # NORM AND DEBUG RULES
