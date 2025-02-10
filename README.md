@@ -87,8 +87,32 @@ Requites **MLX42** library and its dependencies.
 
 3. Run the game with a map file (e.g., `example.ber` for mandatory, `enemies.ber` for bonus):  
    ```bash  
-   ./so_long assets/maps/enemies.ber
-   ```  
+   ./so_long assets/maps/example.ber
+   ./so_long_bonus assets/maps/enemies.ber
+
+   ```
+
+---
+
+### Error Handling  
+
+| **Error Scenario**                                      | **Error Message**                                                                 |
+|---------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **No map file provided**                                | `Error\nInvalid map: needs .ber extension`                                        |
+| **Map file does not exist**                             | `Error\nInvalid map: unable to open or doesn't exists`                            |
+| **Map file is empty**                                   | `Error\nInvalid map: file is empty`                                               |
+| **Map file is too big (max 100x50)**                    | `Error\nInvalid map: too big, max 100x50`                                         |
+| **Map file is not rectangular**                         | `Error\nInvalid map: not rectangular`                                             |
+| **Map file cannot be opened**                           | `Error\nInvalid map: unable to open`                                              |
+| **Map file contains invalid characters**                | `Error\nInvalid map: invalid char introduced`                                     |
+| **Map has no collectibles**                             | `Error\nInvalid map: needs 1+ Collectibles`                                       |
+| **Map has no exit**                                     | `Error\nInvalid map: needs 1x Exit only`                                          |
+| **Map has no player starting position**                 | `Error\nInvalid map: needs 1x Player only`                                        |
+| **Map has multiple exits or players**                   | `Error\nInvalid map: needs 1x Exit only` or `Error\nInvalid map: needs 1x Player only` |
+| **Map is not enclosed by walls**                        | `Error\nInvalid map: needs enclosed in Walls (row check)` or `Error\nInvalid map: needs enclosed in Walls (column check)` |
+| **Collectibles are unreachable**                        | `Error\nInvalid map: Collectibles aren't reachable`                               |
+| **Exit is unreachable**                                 | `Error\nInvalid map: Exit is not reachable`                                       |
+| **MLX42-specific errors**                               | `Error\nMLX42 Error: [specific MLX42 error message]`                              |
 
 ---
 
