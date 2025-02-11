@@ -2,7 +2,7 @@
 [42 Cursus] A simple 2D game built with **MLX42** where the player must collect all items and reach the exit while navigating a custom map.  
 This project was designed to enhance skills in **graphics programming**, **event handling**, and **C programming**.
 
-![Ejemplo del juego](assets/images/so_long.png)
+![Example of so_long](assets/images/so_long_bonus.gif)
 
 Keywords  
 - **2D Game Development**  
