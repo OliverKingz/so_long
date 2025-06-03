@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:37:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/01/29 17:15:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:45:46 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int32_t	main(int argc, char **argv)
 		mlx_terminate(game.mlx);
 	}
 	else
-		ft_mlx_err("Usage: ./so_long \"assets/maps/example.ber\"");
+		ft_mlx_err("Usage: ./so_long \"assets/maps/example.ber\"\n");
 	return (EXIT_SUCCESS);
 }
