@@ -98,29 +98,45 @@ This project was a great opportunity to deepen my understanding of:
 
 ## Installation
 
-Requites **MLX42** library and its dependencies.
+### Requirements
+
+Requires **MLX42** library and its dependencies.
+
+---
 
 ### How to Run
 
-1. Clone this repository:
+1. **Clone this repository:**
 
    ```bash
    git clone https://github.com/yourusername/so_long.git
    cd so_long
    ```
 
-2. Compile the project using the provided **Makefile**, use the bonus rule for a better experience:
+2. **Initialize submodules (if not already done):**
+
+   ```bash
+   git submodule update --init --recursive
+   ```
+
+3. **Compile the project using the provided Makefile** (use the `bonus` rule for a better experience):
 
    ```bash
    make bonus
    ```
 
-3. Run the game with a map file (e.g., `example.ber` for mandatory, `enemies.ber` for bonus):
+   If the above command fails to compile **MLX42** correctly (for example, on WSL or with specific compiler issues), you can use the alternative script to compile MLX42 library:
+
+   ```bash
+   bash alternative_mlx42_compiler.sh
+   make bonus
+   ```
+
+4. **Run the game with a map file** (e.g., `example.ber` for mandatory, `enemies.ber` for bonus):
 
    ```bash
    ./so_long assets/maps/example.ber
    ./so_long_bonus assets/maps/enemies.ber
-
    ```
 
 ---
